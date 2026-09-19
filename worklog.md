@@ -54,3 +54,23 @@ Stage Summary:
 - Fonctionnalité d'export validée end-to-end sur un vrai site Framer (19 pages, multi-fichiers)
 - Le site exporté est fonctionnel hors ligne : navigation interne, images, fonts, CSS OK
 - ZIP livré dans db/exports/ ; flux scan → sélection → export → download opérationnel
+
+---
+Task ID: 4
+Agent: Super Z (main agent)
+Task: Test flux UI complet, ajustement options, rebranding SnapSite, production-ready Vercel
+
+Work Log:
+- Découverte : le wizard d'export (1430 lignes) existait mais n'était PAS branché — le hero simulait un scan avec setTimeout
+- Backend réécrit pour Vercel : /api/export synchrone (runExport → ZIP buffer en mémoire, maxDuration 300, headers x-export-*), suppression jobs.ts + route download + étape checkout factice
+- Front branché : hero → openWizard (zustand) → wizard 3 étapes (config/optimize/vérification) → progress-modal (progression simulée + auto-download blob)
+- Rebranding complet NoCodeExport → SnapSite : header (Snap/Site), footer, layout metadata, FAQ, comparison, seo-content, pricing, labels formulaires (forms mode "snapsite"), types.ts
+- Tests : API synchrone validée par curl (2 pages, ZIP 4,2 Mo, 13 s, headers stats OK) puis flux UI complet via agent-browser : scan 19 pages → sélection → étapes 2-3 → Démarrer → "Exportation terminée ! 19 pages / 334 fichiers / 6.9 Mo" + téléchargement auto
+- Diagnostiqué erreur console #421 : provient du site Framer dans l'iframe preview, pas de notre app
+- next build production OK (11,8 s) ; dev server redémarré
+- .gitignore étendu (db/, captures, reference_site), README.md créé (architecture + guide déploiement Vercel), commit git propre
+
+Stage Summary:
+- App production-ready : flux export 100% fonctionnel dans l'UI, stateless, déployable sur Vercel sans infra
+- Nom : SnapSite — aucune référence NoCodeExport restante (vérifié par grep)
+- Commit créé, en attente de l'URL du repo GitHub de l'utilisateur pour push
