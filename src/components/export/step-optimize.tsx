@@ -11,7 +11,7 @@ export function StepOptimize() {
 
   return (
     <div>
-      <p className="text-sm font-bold text-teal-600">Étape 2 sur 3</p>
+      <p className="text-sm font-bold text-violet-600">Étape 2 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Fine-tune your files
       </h2>
@@ -55,7 +55,7 @@ export function StepOptimize() {
           <div className="mt-3 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div className="flex items-center gap-2.5">
-                <Code2 className="size-5 shrink-0 text-orange-500" />
+                <Code2 className="size-5 shrink-0 text-amber-500" />
                 <p className="text-sm font-bold text-slate-900">Generate sitemap.xml</p>
               </div>
               <p className="mt-2 text-sm leading-relaxed text-slate-500">
@@ -64,7 +64,7 @@ export function StepOptimize() {
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div className="flex items-center gap-2.5">
-                <Bot className="size-5 shrink-0 text-orange-500" />
+                <Bot className="size-5 shrink-0 text-amber-500" />
                 <p className="text-sm font-bold text-slate-900">Generate robots.txt</p>
               </div>
               <p className="mt-2 text-sm leading-relaxed text-slate-500">
@@ -76,9 +76,9 @@ export function StepOptimize() {
           <div className="mt-3 flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-relaxed text-slate-500">
             <PartyPopper className="mt-0.5 size-5 shrink-0 text-slate-400" />
             <p>
-              Vous exportez une seule page — sitemap.xml et robots.txt sont générés uniquement
-              pour les exportations de plusieurs pages ({pages.length} pages détectées sur ce
-              site). Repassez en mode « Plusieurs pages » à l&apos;étape 1 pour les inclure.
+              Vous exportez une seule page — sitemap.xml et robots.txt sont générés uniquement pour
+              les exportations de plusieurs pages ({pages.length} pages détectées sur ce site).
+              Repassez en mode « Plusieurs pages » à l&apos;étape 1 pour les inclure.
             </p>
           </div>
         )}

@@ -4,17 +4,14 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// ─── Green filled checkbox (matches reference screenshots) ──────────────────
-
+/** Violet filled checkbox used across the wizard. */
 export function GreenCheckbox({
   checked,
   onToggle,
-  disabled,
   label,
 }: {
   checked: boolean;
   onToggle: () => void;
-  disabled?: boolean;
   label: string;
 }) {
   return (
@@ -23,22 +20,16 @@ export function GreenCheckbox({
       role="checkbox"
       aria-checked={checked}
       aria-label={label}
-      disabled={disabled}
       onClick={onToggle}
       className={cn(
         "flex size-5 shrink-0 items-center justify-center rounded-md border-2 transition-all duration-150",
-        checked
-          ? "border-teal-600 bg-teal-600 text-white shadow-sm"
-          : "border-slate-300 bg-white hover:border-teal-500",
-        disabled && "opacity-50"
+        checked ? "border-violet-600 bg-violet-600 text-white" : "border-slate-300 bg-white hover:border-violet-500"
       )}
     >
       {checked && <Check className="size-3.5" strokeWidth={3.5} />}
     </button>
   );
 }
-
-// ─── Card dropdown (Formulaires / Livraison de fichiers) ────────────────────
 
 export type DropdownEntry = {
   id: string;
@@ -49,6 +40,7 @@ export type DropdownEntry = {
   disabled?: boolean;
 };
 
+/** Card dropdown (Formulaires / Livraison). */
 export function CardDropdown({
   entries,
   value,
@@ -83,12 +75,8 @@ export function CardDropdown({
         className="flex w-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-left transition-colors hover:border-slate-300"
       >
         <span className="text-slate-500">{current?.icon}</span>
-        <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-800">
-          {current?.title}
-        </span>
-        <ChevronDown
-          className={cn("size-4 shrink-0 text-slate-400 transition-transform", open && "rotate-180")}
-        />
+        <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-800">{current?.title}</span>
+        <ChevronDown className={cn("size-4 shrink-0 text-slate-400 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
         <div className="absolute left-0 right-0 top-full z-30 mt-2 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
@@ -121,7 +109,7 @@ export function CardDropdown({
                 </span>
                 <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{e.desc}</span>
               </span>
-              {e.id === value && <Check className="mt-0.5 size-4 shrink-0 text-teal-600" />}
+              {e.id === value && <Check className="mt-0.5 size-4 shrink-0 text-violet-600" />}
             </button>
           ))}
         </div>
@@ -130,8 +118,7 @@ export function CardDropdown({
   );
 }
 
-// ─── Toggle row (step 2) ─────────────────────────────────────────────────────
-
+/** Toggle row (step 2). */
 export function ToggleRow({
   icon,
   title,
@@ -160,7 +147,7 @@ export function ToggleRow({
         onClick={onToggle}
         className={cn(
           "relative h-6 w-11 shrink-0 rounded-full transition-colors duration-200",
-          checked ? "bg-teal-600" : "bg-slate-800"
+          checked ? "bg-violet-600" : "bg-slate-700"
         )}
       >
         <span
@@ -174,8 +161,7 @@ export function ToggleRow({
   );
 }
 
-// ─── Collapsible section header ──────────────────────────────────────────────
-
+/** Collapsible section header. */
 export function SectionHeader({
   title,
   right,
@@ -190,53 +176,20 @@ export function SectionHeader({
   icon?: ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className="flex w-full items-center gap-2.5 text-left"
-      aria-expanded={open}
-    >
+    <button type="button" onClick={onToggle} className="flex w-full items-center gap-2.5 text-left" aria-expanded={open}>
       {icon}
       <span className="flex-1 text-base font-bold text-slate-900">{title}</span>
       {right}
-      <ChevronDown
-        className={cn("size-4 shrink-0 text-slate-400 transition-transform", open && "rotate-180")}
-      />
+      <ChevronDown className={cn("size-4 shrink-0 text-slate-400 transition-transform", open && "rotate-180")} />
     </button>
   );
 }
 
-// ─── Teal check badge (selected card corner) ────────────────────────────────
-
+/** Corner badge on selected mode cards. */
 export function CheckBadge() {
   return (
-    <span className="absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-teal-600 text-white shadow-md ring-2 ring-white">
+    <span className="absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-violet-600 text-white shadow-md ring-2 ring-white">
       <Check className="size-3.5" strokeWidth={3.5} />
     </span>
-  );
-}
-
-// ─── Bottom bar CTA button ───────────────────────────────────────────────────
-
-export function PrimaryButton({
-  children,
-  onClick,
-  disabled,
-  type = "button",
-}: {
-  children: ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: "button" | "submit";
-}) {
-  return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      className="btn-teal-gradient inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white shadow-[0_8px_20px_rgba(13,148,136,0.35)] transition-all duration-200 hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      {children}
-    </button>
   );
 }

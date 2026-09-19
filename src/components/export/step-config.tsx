@@ -20,55 +20,95 @@ import { cn } from "@/lib/utils";
 
 const INITIAL_VISIBLE = 8;
 
+const FORM_MODES = [
+  {
+    id: "snapsite" as const,
+    icon: <Mail className="size-5" />,
+    desc: "Nous traitons les soumissions et vous envoyons les données par e-mail.",
+  },
+  {
+    id: "manual" as const,
+    icon: <Code2 className="size-5" />,
+    desc: "Conservez les attributs du formulaire original. Vous gérez le backend.",
+  },
+  {
+    id: "custom" as const,
+    icon: <Link2 className="size-5" />,
+    desc: "Envoyez les données à votre propre API (Zapier, Make, etc.).",
+  },
+  {
+    id: "formspree" as const,
+    icon: <Globe className="size-5" />,
+    desc: "Envoyez les soumissions à Formspree. Collez l'URL de votre endpoint ci-dessous.",
+  },
+  {
+    id: "netlify" as const,
+    icon: <Upload className="size-5" />,
+    desc: "Détection automatique une fois le site déployé sur Netlify.",
+  },
+];
+
+const DELIVERY_MODES = [
+  { id: "zip" as const, title: "ZIP download", desc: "Download the export as a ZIP file.", icon: <Download className="size-5" /> },
+  { id: "github" as const, title: "Sync with GitHub", desc: "Push your export to a GitHub repository.", icon: <Code2 className="size-5" />, badge: "Pro", disabled: true },
+  { id: "netlify" as const, title: "Deploy to Netlify", desc: "Deploy your export as a live Netlify site.", icon: <Globe className="size-5" />, badge: "Pro", disabled: true },
+];
+
 export function StepConfig() {
   const {
-    pages,
-    selected,
-    mode,
-    scanning,
-    scanError,
-    options,
-    setMode,
-    togglePage,
-    selectAll,
-    deselectAll,
-    patchOptions,
+    pages, selected, mode, scanning, scanError, options,
+    setMode, togglePage, selectAll, deselectAll, patchOptions,
   } = useExportStore();
 
   const [search, setSearch] = useState("");
   const [visible, setVisible] = useState(INITIAL_VISIBLE);
-  const [pagesOpen, setPagesOpen] = useState(true);
-  const [settingsOpen, setSettingsOpen] = useState(true);
-  const [assetsOpen, setAssetsOpen] = useState(true);
-  const [formsOpen, setFormsOpen] = useState(true);
-  const [deliveryOpen, setDeliveryOpen] = useState(true);
+  const [closed, setClosed] = useState<Record<string, boolean>>({});
+  const toggle = (k: string) => setClosed((c) => ({ ...c, [k]: !c[k] }));
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return pages;
-    return pages.filter(
-      (p) => p.path.toLowerCase().includes(q) || p.title.toLowerCase().includes(q)
-    );
+    return pages.filter((p) => p.path.toLowerCase().includes(q) || p.title.toLowerCase().includes(q));
   }, [pages, search]);
 
   const shown = filtered.slice(0, visible);
-  const total = pages.length;
+  const formMode = FORM_MODES.find((m) => m.id === options.forms)!;
+
+  const modeCard = (id: "single" | "multi", icon: React.ReactNode, title: string, desc: string) => (
+    <button
+      type="button"
+      onClick={() => setMode(id)}
+      aria-pressed={mode === id}
+      className={cn(
+        "relative rounded-xl border p-4 text-left transition-all duration-150",
+        mode === id ? "border-violet-600 bg-violet-50/60 ring-1 ring-violet-600" : "border-slate-200 bg-white hover:border-slate-300"
+      )}
+    >
+      {mode === id && <CheckBadge />}
+      <div className="flex items-start gap-3">
+        <span className="mt-0.5 shrink-0 text-slate-500">{icon}</span>
+        <div>
+          <p className="text-sm font-bold text-slate-900">{title}</p>
+          <p className="mt-1 text-sm leading-snug text-slate-500">{desc}</p>
+        </div>
+      </div>
+    </button>
+  );
 
   return (
     <div>
-      {/* Heading */}
-      <p className="text-sm font-bold text-teal-600">Étape 1 sur 3</p>
+      <p className="text-sm font-bold text-violet-600">Étape 1 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Choisissez quoi exporter
       </h2>
       <p className="mt-3 max-w-2xl text-slate-500">
-        Sélectionnez vos pages, choisissez les ressources à télécharger et décidez comment
-        recevoir vos fichiers.
+        Sélectionnez vos pages, choisissez les ressources à télécharger et décidez comment recevoir
+        vos fichiers.
       </p>
 
       {scanning && (
-        <div className="mt-6 flex items-center gap-3 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-medium text-teal-800">
-          <span className="size-4 animate-spin rounded-full border-2 border-teal-300 border-t-teal-600" />
+        <div className="mt-6 flex items-center gap-3 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm font-medium text-violet-800">
+          <span className="size-4 animate-spin rounded-full border-2 border-violet-300 border-t-violet-600" />
           Analyse du site en cours — découverte des pages…
         </div>
       )}
@@ -82,68 +122,19 @@ export function StepConfig() {
       <section className="mt-7 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <SectionHeader
           title="Pages à exporter"
-          right={
-            <span className="mr-1 text-sm text-slate-500">
-              {selected.length} sur {total} sélectionnées
-            </span>
-          }
-          open={pagesOpen}
-          onToggle={() => setPagesOpen((o) => !o)}
+          right={<span className="mr-1 text-sm text-slate-500">{selected.length} sur {pages.length} sélectionnées</span>}
+          open={!closed.pages}
+          onToggle={() => toggle("pages")}
         />
 
-        {pagesOpen && (
+        {!closed.pages && (
           <div className="mt-5">
-            {/* Mode cards */}
             <div className="grid gap-4 sm:grid-cols-2">
-              <button
-                type="button"
-                onClick={() => setMode("single")}
-                aria-pressed={mode === "single"}
-                className={cn(
-                  "relative rounded-xl border p-4 text-left transition-all duration-150",
-                  mode === "single"
-                    ? "border-teal-600 bg-teal-50/60 ring-1 ring-teal-600"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                )}
-              >
-                {mode === "single" && <CheckBadge />}
-                <div className="flex items-start gap-3">
-                  <FileUp className="mt-0.5 size-5 shrink-0 text-slate-500" />
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">Page unique</p>
-                    <p className="mt-1 text-sm leading-snug text-slate-500">
-                      Exportez uniquement l&apos;URL que vous avez saisie.
-                    </p>
-                  </div>
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setMode("multi")}
-                aria-pressed={mode === "multi"}
-                className={cn(
-                  "relative rounded-xl border p-4 text-left transition-all duration-150",
-                  mode === "multi"
-                    ? "border-teal-600 bg-teal-50/60 ring-1 ring-teal-600"
-                    : "border-slate-200 bg-white hover:border-slate-300"
-                )}
-              >
-                {mode === "multi" && <CheckBadge />}
-                <div className="flex items-start gap-3">
-                  <SlidersHorizontal className="mt-0.5 size-5 shrink-0 text-slate-500" />
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">Plusieurs pages</p>
-                    <p className="mt-1 text-sm leading-snug text-slate-500">
-                      Choisissez parmi les {total} pages trouvées.
-                    </p>
-                  </div>
-                </div>
-              </button>
+              {modeCard("single", <FileUp className="size-5" />, "Page unique", "Exportez uniquement l'URL saisie.")}
+              {modeCard("multi", <SlidersHorizontal className="size-5" />, "Plusieurs pages", `Choisissez parmi les ${pages.length} pages trouvées.`)}
             </div>
 
-            {/* Search */}
-            <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 focus-within:border-teal-500">
+            <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 focus-within:border-violet-500">
               <Search className="size-4 shrink-0 text-slate-400" />
               <input
                 type="text"
@@ -158,71 +149,46 @@ export function StepConfig() {
               />
             </div>
 
-            {/* Select links */}
             <div className="mt-3 flex items-center gap-5">
-              <button
-                type="button"
-                onClick={selectAll}
-                className="text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800"
-              >
+              <button type="button" onClick={selectAll} className="text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800">
                 Sélectionnez tout
               </button>
-              <button
-                type="button"
-                onClick={deselectAll}
-                className="text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800"
-              >
+              <button type="button" onClick={deselectAll} className="text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800">
                 Tout désélectionner
               </button>
             </div>
 
-            {/* Page list */}
             <ul className="mt-2">
-              {shown.map((p) => {
-                const checked = selected.includes(p.url);
-                return (
-                  <li key={p.url} className="border-b border-slate-100 last:border-b-0">
-                    <label className="flex cursor-pointer items-center gap-3 py-3">
-                      <GreenCheckbox
-                        checked={checked}
-                        onToggle={() => togglePage(p.url)}
-                        label={`Sélectionner ${p.path}`}
-                      />
-                      <span
-                        onClick={(e) => {
-                          e.preventDefault();
-                          togglePage(p.url);
-                        }}
-                        className="min-w-0 flex-1 truncate text-sm font-medium text-slate-700"
-                      >
-                        {p.path}
-                      </span>
-                      {p.title && (
-                        <span className="hidden max-w-[45%] truncate text-xs text-slate-400 sm:block">
-                          {p.title}
-                        </span>
-                      )}
-                    </label>
-                  </li>
-                );
-              })}
-              {shown.length === 0 && (
-                <li className="py-4 text-sm text-slate-400">Aucune page ne correspond.</li>
-              )}
+              {shown.map((p) => (
+                <li key={p.url} className="border-b border-slate-100 last:border-b-0">
+                  <label className="flex cursor-pointer items-center gap-3 py-3">
+                    <GreenCheckbox checked={selected.includes(p.url)} onToggle={() => togglePage(p.url)} label={`Sélectionner ${p.path}`} />
+                    <span
+                      onClick={(e) => {
+                        e.preventDefault();
+                        togglePage(p.url);
+                      }}
+                      className="min-w-0 flex-1 truncate text-sm font-medium text-slate-700"
+                    >
+                      {p.path}
+                    </span>
+                    {p.title && (
+                      <span className="hidden max-w-[45%] truncate text-xs text-slate-400 sm:block">{p.title}</span>
+                    )}
+                  </label>
+                </li>
+              ))}
+              {shown.length === 0 && <li className="py-4 text-sm text-slate-400">Aucune page ne correspond.</li>}
             </ul>
 
             {filtered.length > INITIAL_VISIBLE && (
               <button
                 type="button"
                 onClick={() => setVisible((v) => (v >= filtered.length ? INITIAL_VISIBLE : v + 12))}
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800"
               >
-                {visible >= filtered.length
-                  ? "Afficher moins de pages"
-                  : `Afficher ${filtered.length - visible} pages de plus`}
-                <ChevronDown
-                  className={cn("size-4", visible >= filtered.length && "rotate-180")}
-                />
+                {visible >= filtered.length ? "Afficher moins de pages" : `Afficher ${filtered.length - visible} pages de plus`}
+                <ChevronDown className={cn("size-4", visible >= filtered.length && "rotate-180")} />
               </button>
             )}
           </div>
@@ -232,26 +198,21 @@ export function StepConfig() {
       {/* ── Export settings ── */}
       <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
         <SectionHeader
-          title="Exporter les paramètres"
+          title="Paramètres d'exportation"
           icon={<SlidersHorizontal className="size-5 text-slate-600" />}
-          open={settingsOpen}
-          onToggle={() => setSettingsOpen((o) => !o)}
+          open={!closed.settings}
+          onToggle={() => toggle("settings")}
         />
 
-        {settingsOpen && (
+        {!closed.settings && (
           <div className="mt-5 space-y-6">
-            {/* Actifs */}
+            {/* Assets */}
             <div className="border-b border-slate-100 pb-6">
-              <SectionHeader
-                title="Actifs"
-                open={assetsOpen}
-                onToggle={() => setAssetsOpen((o) => !o)}
-              />
-              {assetsOpen && (
+              <SectionHeader title="Actifs" open={!closed.assets} onToggle={() => toggle("assets")} />
+              {!closed.assets && (
                 <div className="mt-3">
                   <p className="text-sm leading-relaxed text-slate-500">
-                    Choisissez les ressources à télécharger. Toutes les ressources qui ne peuvent
-                    pas être téléchargées peuvent toujours dépendre du site d&apos;origine.
+                    Choisissez les ressources à télécharger. Le reste restera lié au site d'origine.
                   </p>
                   <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                     {(
@@ -276,129 +237,46 @@ export function StepConfig() {
               )}
             </div>
 
-            {/* Formulaires */}
+            {/* Forms */}
             <div className="border-b border-slate-100 pb-6">
-              <SectionHeader
-                title="Formulaires"
-                open={formsOpen}
-                onToggle={() => setFormsOpen((o) => !o)}
-              />
-              {formsOpen && (
+              <SectionHeader title="Formulaires" open={!closed.forms} onToggle={() => toggle("forms")} />
+              {!closed.forms && (
                 <div className="mt-4">
                   <CardDropdown
                     ariaLabel="Gestion des formulaires"
                     value={options.forms}
                     onChange={(id) => patchOptions({ forms: id as never })}
-                    entries={[
-                      {
-                        id: "snapsite",
-                        title: FORMS_LABELS.snapsite,
-                        desc: "Nous traitons les soumissions de formulaires et vous envoyons les données par e-mail.",
-                        icon: <Mail className="size-5" />,
-                      },
-                      {
-                        id: "manual",
-                        title: FORMS_LABELS.manual,
-                        desc: "Conservez les attributs de la forme originale. Vous gérez le backend.",
-                        icon: <Code2 className="size-5" />,
-                      },
-                      {
-                        id: "custom",
-                        title: FORMS_LABELS.custom,
-                        desc: "Envoyez les données du formulaire à votre propre API (Zapier, Make, etc.).",
-                        icon: <Link2 className="size-5" />,
-                      },
-                      {
-                        id: "formspree",
-                        title: FORMS_LABELS.formspree,
-                        desc: "Envoyez les soumissions à Formspree. Collez l'URL de votre point de terminaison ci-dessous.",
-                        icon: <Globe className="size-5" />,
-                      },
-                      {
-                        id: "netlify",
-                        title: FORMS_LABELS.netlify,
-                        desc: "Détection automatique des formulaires lorsqu'ils sont déployés sur Netlify. Aucun backend nécessaire.",
-                        icon: <Upload className="size-5" />,
-                      },
-                    ]}
+                    entries={FORM_MODES.map((m) => ({ id: m.id, title: FORMS_LABELS[m.id], desc: m.desc, icon: m.icon }))}
                   />
                   {(options.forms === "custom" || options.forms === "formspree") && (
                     <input
                       type="url"
                       value={options.formsEndpoint}
                       onChange={(e) => patchOptions({ formsEndpoint: e.target.value })}
-                      placeholder={
-                        options.forms === "formspree"
-                          ? "https://formspree.io/f/xxxxxxx"
-                          : "https://votre-api.com/endpoint"
-                      }
-                      className="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-teal-500"
+                      placeholder={options.forms === "formspree" ? "https://formspree.io/f/xxxxxxx" : "https://votre-api.com/endpoint"}
+                      className="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-violet-500"
                     />
                   )}
-                  {options.forms === "manual" && (
-                    <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                      Configurez vous-même la gestion des formulaires après l&apos;exportation. Les
-                      formulaires peuvent nécessiter une nouvelle URL de soumission pour
-                      fonctionner.
-                    </p>
-                  )}
-                  {options.forms === "snapsite" && (
-                    <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                      Les formulaires détectés seront acheminés via SnapSite — vous recevrez
-                      les soumissions par e-mail après l&apos;exportation.
-                    </p>
-                  )}
-                  {options.forms === "netlify" && (
-                    <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                      L&apos;attribut data-netlify sera ajouté à chaque formulaire exporté.
-                    </p>
-                  )}
+                  <p className="mt-3 text-sm leading-relaxed text-slate-500">{formMode.desc}</p>
                 </div>
               )}
             </div>
 
-            {/* Livraison de fichiers */}
+            {/* Delivery */}
             <div>
-              <SectionHeader
-                title="Livraison de fichiers"
-                open={deliveryOpen}
-                onToggle={() => setDeliveryOpen((o) => !o)}
-              />
-              {deliveryOpen && (
+              <SectionHeader title="Livraison de fichiers" open={!closed.delivery} onToggle={() => toggle("delivery")} />
+              {!closed.delivery && (
                 <div className="mt-4">
                   <CardDropdown
                     ariaLabel="Livraison des fichiers"
                     value={options.delivery}
                     onChange={(id) => patchOptions({ delivery: id as never })}
-                    entries={[
-                      {
-                        id: "zip",
-                        title: "ZIP download",
-                        desc: "Download the export as a ZIP file.",
-                        icon: <Download className="size-5" />,
-                      },
-                      {
-                        id: "github",
-                        title: "Sync with GitHub",
-                        desc: "Push your export to a GitHub repository.",
-                        icon: <Code2 className="size-5" />,
-                        badge: "Pro",
-                        disabled: true,
-                      },
-                      {
-                        id: "netlify",
-                        title: "Deploy to Netlify",
-                        desc: "Deploy your export as a live Netlify site.",
-                        icon: <Globe className="size-5" />,
-                        badge: "Pro",
-                        disabled: true,
-                      },
-                    ]}
+                    entries={DELIVERY_MODES}
                   />
                   <p className="mt-3 text-sm leading-relaxed text-slate-500">
                     La livraison GitHub et Netlify est disponible avec Pro ou Agency.{" "}
-                    <span className="font-medium text-teal-700 underline underline-offset-2">
-                      Choisissez une option d&apos;exportation
+                    <span className="font-medium text-violet-700 underline underline-offset-2">
+                      Choisissez une option d'exportation
                     </span>
                   </p>
                 </div>

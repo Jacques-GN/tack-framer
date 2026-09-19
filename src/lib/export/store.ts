@@ -76,28 +76,24 @@ const initial = {
 // Client-side simulated timeline shown while the synchronous export runs.
 // The server does the real work; the UI advances through realistic phases
 // and snaps to 100% when the ZIP response arrives.
-function simulateProgress(
-  pagesTotal: number,
-  onTick: (p: ExportProgress) => void
-): () => void {
+function simulateProgress(pagesTotal: number, onTick: (p: ExportProgress) => void): () => void {
   const start = Date.now();
-  const log: string[] = [];
-  log.push(`Export de ${pagesTotal} page(s) lancé…`);
+  const log = [`Export de ${pagesTotal} page(s) lancé…`];
   const timer = setInterval(() => {
     const elapsed = (Date.now() - start) / 1000;
     // Asymptotic curve: fast start, approaching 95% but never reaching it
     const pct = Math.min(95, 100 * (1 - Math.exp(-elapsed / 14)));
-    let label: string;
-    if (pct < 18) label = `Téléchargement des pages… (0/${pagesTotal})`;
-    else if (pct < 30) label = `Téléchargement des pages… (${Math.min(pagesTotal, Math.round((pct / 95) * pagesTotal * 2.2))}/${pagesTotal})`;
-    else if (pct < 75) label = `Téléchargement des actifs… ${Math.round(pct * 3.4)} fichiers`;
-    else if (pct < 90) label = "Réécriture du HTML et réécriture des liens…";
-    else label = "Création de l'archive ZIP…";
-
-    if (timer && pct > 18 && log.length === 1) log.push("Pages récupérées — collecte des actifs…");
-    if (timer && pct > 75 && log.length === 2) log.push("Réécriture du HTML (liens internes + actifs locaux)…");
-    if (timer && pct > 90 && log.length === 3) log.push("Création de l'archive ZIP…");
-
+    const label =
+      pct < 30
+        ? `Téléchargement des pages… (${Math.min(pagesTotal, Math.round((pct / 95) * pagesTotal * 2.2))}/${pagesTotal})`
+        : pct < 75
+          ? `Téléchargement des actifs… ${Math.round(pct * 3.4)} fichiers`
+          : pct < 90
+            ? "Réécriture du HTML et des liens…"
+            : "Création de l'archive ZIP…";
+    if (pct > 30 && log.length === 1) log.push("Pages récupérées — collecte des actifs…");
+    if (pct > 75 && log.length === 2) log.push("Réécriture du HTML (liens internes + actifs locaux)…");
+    if (pct > 90 && log.length === 3) log.push("Création de l'archive ZIP…");
     onTick({ pct, label, log: [...log] });
   }, 500);
   return () => clearInterval(timer);

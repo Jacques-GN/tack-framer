@@ -1,55 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/components/toaster";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Framer to HTML Exporter | SnapSite",
+  title: "SnapSite — Export any website to HTML, CSS & JS",
   description:
-    "Free Framer exporter: 10 single-page exports a month, no credit card. Export Framer to HTML, CSS and JavaScript from a published URL; full sites on Pro.",
-  keywords: [
-    "Framer export",
-    "Framer to HTML",
-    "export Framer site",
-    "Framer to code",
-    "self-host Framer",
-  ],
-  openGraph: {
-    title: "Framer to HTML Exporter | SnapSite",
-    description:
-      "Export your published Framer site as portable HTML, CSS and JavaScript for self-hosting, editing or developer handoff.",
-    siteName: "SnapSite",
-    type: "website",
-  },
+    "SnapSite turns a published site into portable HTML, CSS and JavaScript: scan the URL, pick your pages, download a ready-to-host ZIP.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground font-sans`}
+        className={`${inter.variable} ${outfit.variable} antialiased bg-white text-slate-900`}
       >
         {children}
         <Toaster />

@@ -10,14 +10,12 @@ function fmtBytes(n: number): string {
 }
 
 export function ProgressModal() {
-  const { exporting, progress, done, exportError, closeWizard, startExport } =
-    useExportStore();
-
+  const { exporting, progress, done, exportError, closeWizard, startExport } = useExportStore();
   if (!exporting && !done && !exportError) return null;
 
-  const running = exporting && progress && progress.pct < 100;
-  const failed = !!exportError;
   const finished = !!done;
+  const failed = !!exportError;
+  const running = exporting && progress && progress.pct < 100;
 
   return (
     <div
@@ -30,18 +28,14 @@ export function ProgressModal() {
         {/* Icon + title */}
         <div className="flex flex-col items-center text-center">
           {finished ? (
-            <CheckCircle2 className="size-14 text-teal-600" />
+            <CheckCircle2 className="size-14 text-violet-600" />
           ) : failed ? (
             <XCircle className="size-14 text-red-500" />
           ) : (
-            <Loader2 className="size-14 animate-spin text-teal-600" />
+            <Loader2 className="size-14 animate-spin text-violet-600" />
           )}
           <h3 className="font-display mt-4 text-2xl font-bold tracking-tight text-slate-900">
-            {finished
-              ? "Exportation terminée !"
-              : failed
-                ? "Échec de l'exportation"
-                : "Exportation en cours…"}
+            {finished ? "Exportation terminée !" : failed ? "Échec de l'exportation" : "Exportation en cours…"}
           </h3>
           <p className="mt-1.5 text-sm text-slate-500">
             {finished
@@ -57,7 +51,7 @@ export function ProgressModal() {
           <div className="mt-6">
             <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-400 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-400 transition-all duration-500"
                 style={{ width: `${progress.pct}%` }}
               />
             </div>
@@ -80,25 +74,23 @@ export function ProgressModal() {
         {/* Stats */}
         {finished && done && (
           <dl className="mt-6 grid grid-cols-3 gap-3 rounded-xl bg-slate-50 p-4 text-center">
-            <div>
-              <dt className="text-[11px] font-medium uppercase tracking-wide text-slate-400">Pages</dt>
-              <dd className="font-display text-xl font-bold text-slate-900">{done.pages}</dd>
-            </div>
-            <div>
-              <dt className="text-[11px] font-medium uppercase tracking-wide text-slate-400">Fichiers</dt>
-              <dd className="font-display text-xl font-bold text-slate-900">{done.files}</dd>
-            </div>
-            <div>
-              <dt className="text-[11px] font-medium uppercase tracking-wide text-slate-400">ZIP</dt>
-              <dd className="font-display text-xl font-bold text-slate-900">{fmtBytes(done.bytes)}</dd>
-            </div>
+            {[
+              ["Pages", done.pages],
+              ["Fichiers", done.files],
+              ["ZIP", fmtBytes(done.bytes)],
+            ].map(([label, value]) => (
+              <div key={label as string}>
+                <dt className="text-[11px] font-medium uppercase tracking-wide text-slate-400">{label}</dt>
+                <dd className="font-display text-xl font-bold text-slate-900">{value}</dd>
+              </div>
+            ))}
           </dl>
         )}
 
         {/* Actions */}
         <div className="mt-7 flex flex-col gap-2.5">
           {finished && (
-            <p className="truncate rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-center font-mono text-xs font-medium text-teal-800">
+            <p className="truncate rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-center font-mono text-xs font-medium text-violet-800">
               <Download className="mr-1.5 inline size-3.5" />
               {done?.filename}
             </p>
@@ -107,7 +99,7 @@ export function ProgressModal() {
             <button
               type="button"
               onClick={() => void startExport()}
-              className="btn-teal-gradient inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(13,148,136,0.35)] transition-all hover:brightness-105 active:scale-[0.98]"
+              className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(124,58,237,0.35)] transition-all hover:brightness-105 active:scale-[0.98]"
             >
               Réessayer
             </button>
@@ -115,12 +107,7 @@ export function ProgressModal() {
           <button
             type="button"
             onClick={closeWizard}
-            className={cnx(
-              "inline-flex items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold transition-colors",
-              finished
-                ? "border-slate-200 text-slate-600 hover:bg-slate-50"
-                : "border-transparent text-slate-500 hover:bg-slate-50"
-            )}
+            className="inline-flex items-center justify-center rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50"
           >
             {finished ? "Terminer" : "Annuler"}
           </button>
@@ -128,9 +115,4 @@ export function ProgressModal() {
       </div>
     </div>
   );
-}
-
-// local tiny cn helper to keep this file dependency-light
-function cnx(...parts: Array<string | false | null | undefined>): string {
-  return parts.filter(Boolean).join(" ");
 }
