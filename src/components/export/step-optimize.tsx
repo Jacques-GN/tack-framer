@@ -11,7 +11,7 @@ export function StepOptimize() {
 
   return (
     <div>
-      <p className="text-sm font-bold text-teal-600">Étape 2 sur 4</p>
+      <p className="text-sm font-bold text-teal-600">Étape 2 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Fine-tune your files
       </h2>

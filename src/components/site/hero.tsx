@@ -3,10 +3,12 @@
 import { useState } from "react";
 import { Sparkles, Clipboard } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useExportStore } from "@/lib/export/store";
 
 export function Hero() {
   const [url, setUrl] = useState("");
-  const [loading, setLoading] = useState(false);
+  const openWizard = useExportStore((s) => s.openWizard);
+  const scanning = useExportStore((s) => s.scanning);
 
   const handleExport = () => {
     if (!url.trim()) {
@@ -16,14 +18,8 @@ export function Hero() {
       });
       return;
     }
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Scan started",
-        description: `Scanning ${url.replace(/^https?:\/\//, "")} — review the pages found before export.`,
-      });
-    }, 1400);
+    // Opens the export wizard: real scan -> page selection -> options -> ZIP
+    openWizard(url);
   };
 
   return (
@@ -84,18 +80,18 @@ export function Hero() {
             <button
               type="button"
               onClick={handleExport}
-              disabled={loading}
+              disabled={scanning}
               className="btn-teal-gradient inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3.5 text-base font-bold text-white shadow-[0_10px_28px_rgba(13,148,136,0.45)] transition-all duration-200 hover:brightness-105 active:scale-[0.98] disabled:opacity-70 sm:rounded-full sm:px-7 sm:py-3.5"
             >
-              {loading ? (
+              {scanning ? (
                 <span className="size-5 animate-spin rounded-full border-2 border-white/40 border-t-white" />
               ) : (
                 <Sparkles className="size-5" />
               )}
               <span className="hidden sm:inline">
-                {loading ? "Scanning..." : "Export Site"}
+                {scanning ? "Scanning..." : "Export Site"}
               </span>
-              <span className="sm:hidden">{loading ? "Scanning..." : "Export"}</span>
+              <span className="sm:hidden">{scanning ? "Scanning..." : "Export"}</span>
             </button>
           </div>
           <p className="mt-4 text-sm text-slate-500">

@@ -137,7 +137,7 @@ export function Pricing() {
           <p className="mt-2.5 max-w-3xl leading-relaxed text-slate-600">
             Try one page free. One Free export per domain across all accounts.
             Assets stay linked to the original site, and the export includes a
-            NoCodeExport credit link.
+            SnapSite credit link.
           </p>
           <button
             type="button"

@@ -1,14 +1,27 @@
 "use client";
 
 import { create } from "zustand";
-import type { ExportJob, ExportOptions, ScannedPage } from "@/lib/export/types";
+import type { ExportOptions, ScannedPage } from "@/lib/export/types";
 import { DEFAULT_OPTIONS, normalizeInputUrl } from "@/lib/export/types";
 
 export type PlanId = "site-pass" | "pro" | "free";
 
+export type ExportProgress = {
+  pct: number;
+  label: string;
+  log: string[];
+};
+
+export type ExportDone = {
+  pages: number;
+  files: number;
+  bytes: number;
+  filename: string;
+};
+
 type WizardState = {
   open: boolean;
-  step: 1 | 2 | 3 | 4;
+  step: 1 | 2 | 3;
   // scan state
   url: string;
   scanning: boolean;
@@ -21,16 +34,16 @@ type WizardState = {
   // options
   options: ExportOptions;
   plan: PlanId;
-  // export job
-  jobId: string | null;
-  job: ExportJob | null;
+  // export
   exporting: boolean;
-  pollTimer: ReturnType<typeof setInterval> | null;
+  progress: ExportProgress | null;
+  done: ExportDone | null;
+  exportError: string | null;
   // actions
   openWizard: (url?: string) => void;
   closeWizard: () => void;
   reset: () => void;
-  setStep: (s: 1 | 2 | 3 | 4) => void;
+  setStep: (s: 1 | 2 | 3) => void;
   setUrl: (u: string) => void;
   scan: () => Promise<void>;
   setMode: (m: "single" | "multi") => void;
@@ -40,12 +53,11 @@ type WizardState = {
   patchOptions: (p: Partial<ExportOptions>) => void;
   setPlan: (p: PlanId) => void;
   startExport: () => Promise<void>;
-  stopPolling: () => void;
 };
 
 const initial = {
   open: false,
-  step: 1 as 1 | 2 | 3 | 4,
+  step: 1 as 1 | 2 | 3,
   url: "",
   scanning: false,
   scanError: null as string | null,
@@ -55,11 +67,41 @@ const initial = {
   selected: [] as string[],
   options: { ...DEFAULT_OPTIONS },
   plan: "site-pass" as PlanId,
-  jobId: null as string | null,
-  job: null as ExportJob | null,
   exporting: false,
-  pollTimer: null as ReturnType<typeof setInterval> | null,
+  progress: null as ExportProgress | null,
+  done: null as ExportDone | null,
+  exportError: null as string | null,
 };
+
+// Client-side simulated timeline shown while the synchronous export runs.
+// The server does the real work; the UI advances through realistic phases
+// and snaps to 100% when the ZIP response arrives.
+function simulateProgress(
+  pagesTotal: number,
+  onTick: (p: ExportProgress) => void
+): () => void {
+  const start = Date.now();
+  const log: string[] = [];
+  log.push(`Export de ${pagesTotal} page(s) lancé…`);
+  const timer = setInterval(() => {
+    const elapsed = (Date.now() - start) / 1000;
+    // Asymptotic curve: fast start, approaching 95% but never reaching it
+    const pct = Math.min(95, 100 * (1 - Math.exp(-elapsed / 14)));
+    let label: string;
+    if (pct < 18) label = `Téléchargement des pages… (0/${pagesTotal})`;
+    else if (pct < 30) label = `Téléchargement des pages… (${Math.min(pagesTotal, Math.round((pct / 95) * pagesTotal * 2.2))}/${pagesTotal})`;
+    else if (pct < 75) label = `Téléchargement des actifs… ${Math.round(pct * 3.4)} fichiers`;
+    else if (pct < 90) label = "Réécriture du HTML et réécriture des liens…";
+    else label = "Création de l'archive ZIP…";
+
+    if (timer && pct > 18 && log.length === 1) log.push("Pages récupérées — collecte des actifs…");
+    if (timer && pct > 75 && log.length === 2) log.push("Réécriture du HTML (liens internes + actifs locaux)…");
+    if (timer && pct > 90 && log.length === 3) log.push("Création de l'archive ZIP…");
+
+    onTick({ pct, label, log: [...log] });
+  }, 500);
+  return () => clearInterval(timer);
+}
 
 export const useExportStore = create<WizardState>((set, get) => ({
   ...initial,
@@ -74,12 +116,10 @@ export const useExportStore = create<WizardState>((set, get) => ({
   },
 
   closeWizard: () => {
-    get().stopPolling();
-    set({ open: false, exporting: false });
+    set({ open: false, exporting: false, progress: null });
   },
 
   reset: () => {
-    get().stopPolling();
     set({ ...initial, options: { ...DEFAULT_OPTIONS } });
   },
 
@@ -144,62 +184,69 @@ export const useExportStore = create<WizardState>((set, get) => ({
   startExport: async () => {
     const { scannedUrl, selected, options } = get();
     if (!scannedUrl || selected.length === 0) return;
-    set({ exporting: true, job: null, jobId: null });
+    set({
+      exporting: true,
+      done: null,
+      exportError: null,
+      progress: { pct: 2, label: "Préparation de l'exportation…", log: ["Initialisation…"] },
+    });
+
+    const stopSimulation = simulateProgress(selected.length, (p) => {
+      if (get().exporting) set({ progress: p });
+    });
+
     try {
       const res = await fetch("/api/export", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ url: scannedUrl, pages: selected, options }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        stopSimulation();
         set({
           exporting: false,
-          job: {
-            id: "",
-            status: "error",
-            phase: "error",
-            phaseLabel: "Échec du démarrage",
-            pagesTotal: selected.length,
-            pagesDone: 0,
-            filesCount: 0,
-            bytes: 0,
-            log: [],
-            zipName: "",
-            error: data.error || "Impossible de démarrer l'exportation.",
-            startedAt: Date.now(),
-          },
+          progress: null,
+          exportError:
+            (data && data.error) ||
+            "L'exportation a échoué. Le site est peut-être protégé — réessayez.",
         });
         return;
       }
-      set({ jobId: data.jobId });
-      // start polling
-      get().stopPolling();
-      const timer = setInterval(async () => {
-        const { jobId } = get();
-        if (!jobId) return;
-        try {
-          const r = await fetch(`/api/export?jobId=${jobId}`);
-          const d = await r.json();
-          if (d.ok && d.job) {
-            set({ job: d.job });
-            if (d.job.status === "done" || d.job.status === "error") {
-              get().stopPolling();
-            }
-          }
-        } catch {
-          /* transient network error: keep polling */
-        }
-      }, 1200);
-      set({ pollTimer: timer });
-    } catch {
-      set({ exporting: false, scanError: null });
-    }
-  },
 
-  stopPolling: () => {
-    const t = get().pollTimer;
-    if (t) clearInterval(t);
-    set({ pollTimer: null });
+      const blob = await res.blob();
+      stopSimulation();
+
+      const files = Number(res.headers.get("x-export-files") || 0);
+      const bytes = Number(res.headers.get("x-export-bytes") || blob.size);
+      const pagesCount = Number(res.headers.get("x-export-pages") || selected.length);
+      const filename =
+        res.headers.get("content-disposition")?.match(/filename="?([^";]+)"?/)?.[1] ||
+        "export.zip";
+
+      // Auto-download
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+
+      set({
+        exporting: false,
+        progress: { pct: 100, label: "Exportation terminée", log: [] },
+        done: { pages: pagesCount, files, bytes, filename },
+      });
+    } catch {
+      stopSimulation();
+      set({
+        exporting: false,
+        progress: null,
+        exportError: "Erreur réseau pendant l'exportation. Réessayez.",
+      });
+    }
   },
 }));

@@ -26,10 +26,10 @@ export function Header() {
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-lg font-bold tracking-tight text-slate-900">
-                NoCode
+                Snap
               </span>
               <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-teal-600">
-                Export
+                Site
               </span>
             </span>
           </a>

@@ -199,7 +199,7 @@ export function rewriteHtml(html: string, ctx: RewriteContext): string {
   }
 
   // 3) Forms handling
-  if (ctx.forms.mode === "nocodeexport") {
+  if (ctx.forms.mode === "snapsite") {
     out = out.replace(/<form\b([^>]*)>/gi, (full, attrs: string) => {
       const cleaned = attrs
         .replace(/\s(action|data-netlify|data-formspree)\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")

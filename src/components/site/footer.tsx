@@ -41,7 +41,7 @@ export function Footer() {
     setEmail("");
     toast({
       title: "Subscribed!",
-      description: "You will receive product updates and tutorials from NoCodeExport.",
+      description: "You will receive product updates and tutorials from SnapSite.",
     });
   };
 
@@ -51,7 +51,7 @@ export function Footer() {
         {/* Rating */}
         <p className="flex items-center justify-center gap-2 text-sm text-slate-600">
           <Star className="size-4 fill-amber-400 text-amber-400" />
-          NoCodeExport: 5/5 from 1 verified export user
+          SnapSite: 5/5 from 1 verified export user
         </p>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
@@ -63,10 +63,10 @@ export function Footer() {
               </span>
               <span className="flex flex-col leading-none">
                 <span className="font-display text-lg font-bold tracking-tight text-slate-900">
-                  NoCode
+                  Snap
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-teal-600">
-                  Export
+                  Site
                 </span>
               </span>
             </a>
@@ -101,7 +101,7 @@ export function Footer() {
               </div>
               <p className="mt-3 max-w-xs text-xs leading-relaxed text-slate-500">
                 By subscribing, you agree to receive product updates, tutorials,
-                and marketing emails from NoCodeExport. You can unsubscribe at
+                and marketing emails from SnapSite. You can unsubscribe at
                 any time. See our{" "}
                 <a href="#" className="font-medium text-teal-600 hover:underline">
                   Privacy
@@ -136,7 +136,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center justify-between gap-5 border-t border-slate-200 pt-8 sm:flex-row">
           <p className="text-sm text-slate-500">
-            © 2026 NoCodeExport. All rights reserved.
+            © 2026 SnapSite. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <a

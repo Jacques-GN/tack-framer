@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Framer to HTML Exporter | NoCodeExport",
+  title: "Framer to HTML Exporter | SnapSite",
   description:
     "Free Framer exporter: 10 single-page exports a month, no credit card. Export Framer to HTML, CSS and JavaScript from a published URL; full sites on Pro.",
   keywords: [
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     "self-host Framer",
   ],
   openGraph: {
-    title: "Framer to HTML Exporter | NoCodeExport",
+    title: "Framer to HTML Exporter | SnapSite",
     description:
       "Export your published Framer site as portable HTML, CSS and JavaScript for self-hosting, editing or developer handoff.",
-    siteName: "NoCodeExport",
+    siteName: "SnapSite",
     type: "website",
   },
 };

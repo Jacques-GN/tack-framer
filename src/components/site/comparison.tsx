@@ -41,7 +41,7 @@ export function Comparison() {
         <p className="mt-4 max-w-3xl leading-relaxed text-slate-600">
           Framer&apos;s native HTML-export article says it does not provide a
           self-hosting bundle. Its separate portability guidance describes
-          retrieving published files. NoCodeExport offers a public-URL capture
+          retrieving published files. SnapSite offers a public-URL capture
           workflow; neither the rendered snapshot nor this comparison promises
           an editable Framer project.
         </p>

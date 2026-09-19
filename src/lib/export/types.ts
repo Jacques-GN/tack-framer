@@ -19,7 +19,7 @@ export type ExportOptions = {
   fonts: boolean;
   css: boolean;
   js: boolean;
-  forms: "nocodeexport" | "manual" | "custom" | "formspree" | "netlify";
+  forms: "snapsite" | "manual" | "custom" | "formspree" | "netlify";
   formsEndpoint: string;
   delivery: "zip" | "github" | "netlify";
   minifyHtml: boolean;
@@ -30,31 +30,6 @@ export type ExportParams = {
   url: string;
   pages: string[]; // absolute page URLs selected for export
   options: ExportOptions;
-};
-
-export type JobPhase =
-  | "queued"
-  | "downloading"
-  | "assets"
-  | "packaging"
-  | "done"
-  | "error";
-
-export type ExportJob = {
-  id: string;
-  status: "running" | "done" | "error";
-  phase: JobPhase;
-  phaseLabel: string;
-  pagesTotal: number;
-  pagesDone: number;
-  filesCount: number;
-  bytes: number;
-  log: string[];
-  zipName: string;
-  zipPath?: string;
-  error?: string;
-  startedAt: number;
-  finishedAt?: number;
 };
 
 export const DEFAULT_OPTIONS: ExportOptions = {
@@ -123,7 +98,7 @@ export function relPrefixFor(path: string): string {
 }
 
 export const FORMS_LABELS: Record<ExportOptions["forms"], string> = {
-  nocodeexport: "Formulaires NoCodeExport",
+  snapsite: "Formulaires SnapSite",
   manual: "Manuel / Brut",
   custom: "Point de terminaison personnalisé",
   formspree: "Formspree",

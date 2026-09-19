@@ -11,6 +11,7 @@ import { SeoContent } from "@/components/site/seo-content";
 import { CtaExplore } from "@/components/site/cta-explore";
 import { Footer } from "@/components/site/footer";
 import { CookieBanner, ScrollTopButton } from "@/components/site/overlays";
+import { ExportWizard } from "@/components/export/wizard";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
       <Footer />
       <CookieBanner />
       <ScrollTopButton />
+      <ExportWizard />
     </div>
   );
 }

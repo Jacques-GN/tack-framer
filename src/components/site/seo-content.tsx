@@ -63,7 +63,7 @@ export function SeoContent() {
             </h3>
             <p className="mt-4 leading-relaxed text-slate-600">
               This Framer export code workflow starts from the public, published
-              URL rather than the private editor. NoCodeExport captures the
+              URL rather than the private editor. SnapSite captures the
               rendered frontend and packages the selected pages with their{" "}
               <strong className="font-semibold text-slate-900">
                 HTML, CSS, JavaScript, and metadata
@@ -92,7 +92,7 @@ export function SeoContent() {
               downloading published files, while its{" "}
               <TealLink>HTML export article</TealLink> says native HTML export
               for self-hosting is unavailable. Checked September 17, 2026.
-              NoCodeExport captures the public frontend; this is a separate
+              SnapSite captures the public frontend; this is a separate
               workflow from an official project export.
             </p>
           </article>
@@ -102,7 +102,7 @@ export function SeoContent() {
               What Is Preserved and What Is Not
             </h3>
             <p className="mt-4 leading-relaxed text-slate-600">
-              NoCodeExport captures the rendered HTML, styles, metadata and
+              SnapSite captures the rendered HTML, styles, metadata and
               reachable assets. Supported menus, reveals and other browser
               interactions may continue through captured runtime files or
               recovery helpers, but each page still needs visual and functional

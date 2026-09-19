@@ -52,3 +52,14 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Export artifacts & runtime data
+/db/
+/upload/
+
+# Working screenshots & reference captures (not part of the app)
+/ref_*.png
+/clone_*.png
+/test_*.png
+/ui_*.png
+/reference_site.*
+examples/

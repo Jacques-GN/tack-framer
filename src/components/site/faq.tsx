@@ -10,7 +10,7 @@ const faqs = [
   },
   {
     q: "How do I get code from Framer without a paid Pro plan?",
-    a: "NoCodeExport can capture the public pages of a Framer site without access to your Framer account. Framer's editor has no HTML export button; one Framer article describes downloading the published files, while another says native HTML export for self-hosting is unavailable. Our workflow packages a rendered snapshot of the published site as HTML, CSS and JavaScript; it does not provide an official Framer project bundle or the original React components. CMS data and hosted services require separate handling.",
+    a: "SnapSite can capture the public pages of a Framer site without access to your Framer account. Framer's editor has no HTML export button; one Framer article describes downloading the published files, while another says native HTML export for self-hosting is unavailable. Our workflow packages a rendered snapshot of the published site as HTML, CSS and JavaScript; it does not provide an official Framer project bundle or the original React components. CMS data and hosted services require separate handling.",
   },
   {
     q: "Does this preserve Framer animations?",

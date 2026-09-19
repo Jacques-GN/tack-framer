@@ -52,7 +52,7 @@ export function StepPreview() {
 
   return (
     <div>
-      <p className="text-sm font-bold text-teal-600">Étape 3 sur 4</p>
+      <p className="text-sm font-bold text-teal-600">Étape 3 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Vérifiez votre site et vos fichiers
       </h2>

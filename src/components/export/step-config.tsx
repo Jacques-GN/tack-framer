@@ -57,7 +57,7 @@ export function StepConfig() {
   return (
     <div>
       {/* Heading */}
-      <p className="text-sm font-bold text-teal-600">Étape 1 sur 4</p>
+      <p className="text-sm font-bold text-teal-600">Étape 1 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Choisissez quoi exporter
       </h2>
@@ -291,8 +291,8 @@ export function StepConfig() {
                     onChange={(id) => patchOptions({ forms: id as never })}
                     entries={[
                       {
-                        id: "nocodeexport",
-                        title: FORMS_LABELS.nocodeexport,
+                        id: "snapsite",
+                        title: FORMS_LABELS.snapsite,
                         desc: "Nous traitons les soumissions de formulaires et vous envoyons les données par e-mail.",
                         icon: <Mail className="size-5" />,
                       },
@@ -342,9 +342,9 @@ export function StepConfig() {
                       fonctionner.
                     </p>
                   )}
-                  {options.forms === "nocodeexport" && (
+                  {options.forms === "snapsite" && (
                     <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                      Les formulaires détectés seront acheminés via NoCodeExport — vous recevrez
+                      Les formulaires détectés seront acheminés via SnapSite — vous recevrez
                       les soumissions par e-mail après l&apos;exportation.
                     </p>
                   )}
