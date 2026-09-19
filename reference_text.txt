@@ -1,0 +1,246 @@
+
+Free Framer to HTML Exporter — Export Framer Code
+Skip to content
+NoCode
+Export
+Product
+Features
+Pricing
+Blog
+Resources
+Company
+en
+Login
+Sign Up
+From published URL to portable files
+Export 
+Framer
+ to HTML
+Download your published Framer site as portable HTML, CSS and JavaScript for self-hosting, editing or developer handoff.
+Website URL
+⌘
+V
+Export Site
+How it works
+·
+01
+Paste your
+Framer URL
+and choose pages.
+scanning…
+Pages found
+0
+/
+/about
+/blog/*
+/pricing
+/contact
+Choose what to include
+1
+Paste the public Framer link
+Copy the address of your published site, not its editor. The page must open without a login.
+2
+Choose the pages to export
+The scan follows links up to three levels deep. Select the pages you need from the results, within your plan’s limit.
+How it works
+·
+02
+Download your
+Framer site
+as HTML files.
+yoursite.framer.website
+HTML
+IMAGES
+CSS
+JS
+Inside your ZIP download
+Page content and design
+Your published Framer pages, visible content and responsive styles. This is a copy of the live site, without the Framer editor. Review page titles and search settings before publishing.
+Images and fonts
+Choose downloaded assets to include available images and fonts. Free exports keep them linked to the original site. Videos and embeds may still need an internet connection.
+Menus and animations
+Supported menus, component states and animations are included. Test custom components and embeds; some still need external services.
+How it works
+·
+03
+Test your
+exported site
+then publish it.
+framer-export.zip
+Vercel
+Netlify
+Cloudflare
+GitHub
+Choose your hosting
+1
+Test the exported site
+Unzip the download and open the files through a local web server or temporary hosting. Check layouts, links, forms and animations on desktop and mobile.
+2
+Publish on your chosen host
+Upload the tested files to Vercel, Netlify, Cloudflare Pages or GitHub Pages. Check the live site before changing your domain. Hosting costs and provider terms apply.
+Before you move your domain.
+CMS content is a fixed copy; export again after updates. Reconnect forms and hosted services. Test custom components and advanced animations before launch.
+Framer vs HTML Export Tool Comparison
+Framer’s native HTML-export article says it does not provide a self-hosting bundle. Its separate portability guidance describes retrieving published files. NoCodeExport offers a public-URL capture workflow; neither the rendered snapshot nor this comparison promises an editable Framer project.
+What you need
+Framer native workflow
+Recommended path
+NoCodeExport
+Portable HTML output
+No native HTML bundle for self-hosting is offered in Framer’s HTML-export documentation.
+Packages rendered HTML, CSS, and JavaScript for a standard static hosting workflow.
+Export workflow
+Design, publish and manage the site using Framer’s hosted platform.
+Starts from the live site and produces a ready-to-review export.
+Ownership after launch
+Platform-managed publishing, rendering and optimization services remain part of Framer hosting.
+The exported front-end files can live on your infrastructure; hosted services still need replacements.
+Best fit
+Keeping the design and hosting workflow inside Framer.
+Moving to HTML, reducing lock-in, or handing code to another team.
+Framer HTML-export documentation, checked 17 September 2026:
+www.framer.com
+Framer guides that support the export flow
+Use these guides for migration planning, interaction checks, and deployment of a rendered Framer export.
+Can Framer Export Code? Yes — Here Is How to Get the HTML, CSS and JS
+How to Get Code From Framer (2026 Methods)
+How to Self-Host a Framer Website on Netlify (2026)
+One site or ongoing exports?
+Export once with Site Pass, or choose Pro for regular updates and client projects.
+Site Pass
+One-time export
+One site to move. One payment. No subscription.
+$15
+once
+Export once — $15
+Features included:
+One successful export, up to 100 pages
+Website files with downloaded assets
+30-day access to your download
+Scan your site and review the pages before checkout.
+A failed export restores your pass so you can retry.
+Pro
+Keep exporting as your sites evolve.
+$10
+/ month
+Get Pro — $10/month
+Features included:
+50 exports every month
+Up to 100 pages per export
+Download files and assets, or deploy to GitHub and Netlify
+Billed monthly. Renews until canceled.
+Annual billing and Agency options.
+See all plans
+Frequently Asked Questions
+Everything you need to know about the export process.
+Can I export Framer to HTML for free?
+Yes. Free lets you try a single published page, with images and fonts linked to the original site. It allows up to 10 exports per month, but each domain gets only one successful Free export in total, shared across all Free accounts; that domain allowance does not reset monthly. Failed attempts do not use it. For another export of the same domain, choose a Site Pass for one successful export or Pro for recurring exports.
+How do I get code from Framer without a paid Pro plan?
+NoCodeExport can capture the public pages of a Framer site without access to your Framer account. Framer’s editor has no HTML export button; one Framer article describes downloading the published files, while another says native HTML export for self-hosting is unavailable. Our workflow packages a rendered snapshot of the published site as HTML, CSS and JavaScript; it does not provide an official Framer project bundle or the original React components. CMS data and hosted services require separate handling.
+Does this preserve Framer animations?
+Supported scroll, hover, menu and transition behavior can be retained through captured runtime files or recovery helpers. Results vary by site, so test important interactions at every breakpoint; stateful code components and hosted embeds may need manual work.
+Can I self-host a Framer website on Vercel or Netlify?
+Yes. Export the published Framer site, unzip the HTML, CSS, JavaScript, and assets, then deploy that folder to Vercel, Netlify, Cloudflare Pages, GitHub Pages, or a private server. Test navigation, forms, analytics, and custom domains before moving production traffic because services tied to Framer may need to be reconnected.
+Does it export all Framer pages or only the homepage?
+Single-page export captures the submitted page. Full-site export follows reachable same-site links up to the crawler depth and the selected plan's page limit. Unlinked, private or login-protected routes are not discovered automatically.
+Does the export include local images and custom fonts?
+The local-assets option downloads reachable images and fonts and rewrites their references. Large videos, third-party embeds and inaccessible files can remain remote, so inspect the ZIP before unpublishing the original site.
+What happens to Framer CMS content and forms after export?
+Published CMS pages can be captured as static HTML at export time, so the content remains visible but no longer updates from Framer automatically. Forms and other services that depend on Framer should be tested after export and, when necessary, connected to a new form endpoint or backend before launch.
+Can I update my Framer website after exporting it?
+Yes. You can edit the downloaded files, or publish your changes in Framer and create a new export to deploy. The existing download does not sync automatically. Each Site Pass covers one successful export; use another pass for a later one-off export or Pro for recurring exports within its limits. The lifetime Free allowance for a domain does not renew when you edit the site.
+How to Export Framer to HTML, CSS and JavaScript
+Export a published Framer website by scanning its public URL, selecting the pages you need and downloading a ZIP of the rendered HTML, CSS and JavaScript. Review the files and their remaining service dependencies before moving your domain.
+Framer Export Code: What the ZIP Contains
+This Framer export code workflow starts from the public, published URL rather than the private editor. NoCodeExport captures the rendered frontend and packages the selected pages with their 
+HTML, CSS, JavaScript, and metadata
+. Images and fonts are referenced or included according to the export options and plan.
+The result is portable static code you can inspect, version, edit, and self-host on 
+Vercel
+, 
+Netlify
+, 
+Cloudflare Pages
+, 
+GitHub Pages
+, or your own server. It is not the original Framer project file or an editable set of React components; teams that need application architecture should choose a React or Next.js rebuild.
+Framer’s 
+portability article
+ describes downloading published files, while its 
+HTML export article
+ says native HTML export for self-hosting is unavailable. Checked September 17, 2026. NoCodeExport captures the public frontend; this is a separate workflow from an official project export.
+What Is Preserved and What Is Not
+NoCodeExport
+ captures the rendered HTML, styles, metadata and reachable assets. Supported menus, reveals and other browser interactions may continue through captured runtime files or recovery helpers, but each page still needs visual and functional testing.
+The ZIP is not the original Framer project. CMS updates, forms, custom code components, external embeds and advanced stateful behavior may still depend on Framer or another service and can require replacement.
+Framer Export Code vs a React or Next.js Rebuild
+Choose a static export when the published design is finished and the goal is portable files, independent hosting, a backup, or a fast developer handoff. Choose a React or Next.js rebuild when the site needs reusable components, application state, authentication, a database, or frequent feature development.
+The two outputs solve different problems. Review the tradeoffs in our 
+Framer to code vs Framer to HTML comparison
+ before treating an exported snapshot as a replacement for a maintained application codebase.
+How to Verify a Framer Export Before You Migrate
+Selected pages:
+ compare the scan selection with the HTML files in your download. Open representative pages, including a CMS item if selected; an unlinked page may need separate handling.
+Nested URLs:
+ paste each important destination URL into a new tab and refresh it. Check navigation and redirects instead of relying only on the homepage.
+Images, fonts and scripts:
+ inspect failed network requests and source-host URLs. Free keeps assets linked; paid asset downloading can reduce dependencies, but inaccessible files, videos and embeds may remain remote.
+Mobile interactions:
+ compare desktop and mobile layouts. Test menus with touch and keyboard, scroll effects, links and custom components; record anything that needs adjustment.
+Replacement services:
+ send a test form to an endpoint you control and verify delivery. Reconnect analytics and any search, account or payment service. Published CMS content will not update automatically.
+Search and launch:
+ verify destination canonicals, titles, robots rules and sitemap URLs. Keep existing paths or add redirects, then check HTTPS on the final domain before retiring the original host.
+Use the 
+Framer export walkthrough
+ for page selection and the 
+Framer-to-Netlify guide
+ for deployment checks. Keep a working copy available for rollback.
+Ready to export your Framer site?
+Paste your published URL and review the pages. No payment is needed to scan.
+Check my site
+Also Explore Our Solutions For
+Webflow
+Webflow Needs
+Wix
+Wix Sites
+Wordpress
+WordPress Sites
+Squarespace
+Squarespace Sites
+Elementor
+Elementor Pages
+NoCodeExport: 5/5 from 1 verified export user
+NoCode
+Export
+Empowering designers to own their code. Export clean, semantic HTML from your favorite no-code tools.
+Stay updated
+Email address
+By subscribing, you agree to receive product updates, tutorials, and marketing emails from NoCodeExport. You can unsubscribe at any time. See our
+Privacy
+.
+Product
+Framer Export
+Webflow Export
+Wix Export
+Squarespace Export
+WordPress Export
+Developer API
+All Export Tools
+Company
+Features
+Pricing
+About Us
+Blog
+Contact
+Legal
+Privacy
+Terms
+Cookie Settings
+© 
+2026
+ NoCodeExport. 
+All rights reserved.
+Twitter
+GitHub
+Discord
