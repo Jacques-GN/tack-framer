@@ -1,8 +1,10 @@
-# SnapSite — Framer to HTML Exporter
+# SnapSite — Website to HTML Exporter
 
-Export any published Framer site as a portable, multi-file bundle: HTML pages, images, fonts, CSS and JavaScript — packaged as a ZIP ready for self-hosting, editing or developer handoff.
+Export any published site as a portable, multi-file bundle: HTML pages, images, fonts, CSS and JavaScript — packaged as a ZIP ready for self-hosting, editing or developer handoff.
 
-![Stack](https://img.shields.io/badge/Next.js%2016-React%2019-teal) ![Styling](https://img.shields.io/badge/Tailwind%20CSS%204-shadcn%2Fui-teal)
+![Stack](https://img.shields.io/badge/Next.js%2016-React%2019-violet) ![Styling](https://img.shields.io/badge/Tailwind%20CSS%204-Zustand-violet)
+
+A deliberately minimal codebase: **no auth, no database, 8 runtime dependencies**. Everything you need for the export flow, nothing else.
 
 ## ✨ Features
 
@@ -13,6 +15,10 @@ Export any published Framer site as a portable, multi-file bundle: HTML pages, i
 - **SEO extras** — auto-generated `sitemap.xml`, `robots.txt` and an optional per-page SEO audit report (`audit-report.html`).
 - **Export options** — choose which asset types to include, minify HTML, forms handling (manual / custom endpoint / Formspree / Netlify), live preview of the original site in the wizard.
 - **Zero state** — the export runs fully in memory and streams the ZIP straight back. No database, no cron, no storage bucket required.
+
+## 🎨 Design
+
+Violet primary (`#7c3aed`) with fuchsia and amber section accents, Inter + Outfit typography. The whole design system fits in ~75 lines of CSS (`.btn-primary` gradient, hero grid, two keyframe animations).
 
 ## 🏗️ Architecture
 

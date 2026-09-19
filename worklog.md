@@ -74,3 +74,28 @@ Stage Summary:
 - App production-ready : flux export 100% fonctionnel dans l'UI, stateless, déployable sur Vercel sans infra
 - Nom : SnapSite — aucune référence NoCodeExport restante (vérifié par grep)
 - Commit créé, en attente de l'URL du repo GitHub de l'utilisateur pour push
+
+---
+Task ID: 5
+Agent: Super Z (main agent)
+Task: Optimisation du code source (simplification maximale), suppression page de connexion, changement de couleurs
+
+Work Log:
+- Supprimé : 45 composants shadcn/ui inutilisés (src/components/ui/*), use-mobile, lib/db.ts, prisma/, api/route.ts (hello world), components.json
+- Toast remplacé : implémentation radix (toast.tsx 128 + toaster 34 + use-toast 193 = 355 lignes) -> toast zustand minimal 30 lignes + Toaster 25 lignes (API toast({title,description}) conservée)
+- Header : suppression Login + Sign Up (desktop + mobile), CTA unique "Export a site" ; aucune auth dans l'app
+- Nouvelle palette via sed sur tout src/ : teal->violet, indigo->fuchsia, orange/emerald->ambre/fuchsia + hex (hero #160f2e, btn-primary gradient #8b5cf6->#7c3aed)
+- Composants compactés : header 122->82, how-it-works-01/02/03 401->290 (data-driven), footer 170->135, cta-explore 110->75, pricing 169->140, seo-content 164->140, ui-bits 242->180 (PrimaryButton supprimé), step-config 412->300 (collapse state unifié, helpers de modes), step-preview 341->235 (zoom + menu URL redondants supprimés, device toggle conservé), progress-modal 136->125, hero 104->100
+- store.ts : simulateProgress simplifié ; wizard.tsx : classe ctaBtn mutualisée ; globals.css 215->75 lignes (vars shadcn/chart/sidebar/dark supprimées, .btn-teal-gradient -> .btn-primary)
+- layout.tsx : metadata générique "SnapSite — Export any website to HTML, CSS & JS", JetBrains Mono retirée (mono système)
+- package.json : 46 deps supprimées (radix*, prisma, framer-motion, recharts, next-auth, tanstack, sonner, etc.) -> 8 deps runtime (next, react, react-dom, jszip, lucide-react, zustand, clsx, tailwind-merge) ; scripts db:* retirés ; bun install OK (-60 paquets)
+- Logique d'export INTACTE : crawler.ts / exporter.ts / html.ts / types.ts / 3 routes API non modifiés
+- Vérifications : eslint clean, next build OK (10.9 s), test E2E UI complet via scripts/e2e-ui-test.sh (serveur + agent-browser dans la même session shell car le sandbox reape les enfants) : scan 19 pages -> étapes 1-2-3 -> "Exportation terminée ! 19 pages / 334 fichiers / 6.9 Mo" + téléchargement auto — chiffres identiques à la baseline
+- Screenshots validés : home violet sans Login, wizard étapes 1/2/3, modal terminée
+- README.md mis à jour (positionnement générique, 8 deps, section Design) ; .gitignore (tool-results, scripts)
+
+Stage Summary:
+- ~1 050 lignes en moins sur les fichiers sources actifs (4 657 -> ~3 600) + ~2 500 lignes de composants morts supprimés + 46 deps retirées
+- Aucune page/lien de connexion ; identité visuelle violet/fuchsia/ambre nouvelle génération
+- Fonctionnalité d'export validée non-régression end-to-end dans l'UI (ZIP identique : 334 fichiers / 6.9 Mo)
+- Commits : "refactor: simplification majeure..." + "chore: gitignore..."
