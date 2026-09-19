@@ -59,14 +59,14 @@ export function Pricing() {
               key={plan.name}
               className={
                 plan.featured
-                  ? "relative flex flex-col rounded-2xl border-2 border-violet-500 bg-white p-8 shadow-[0_20px_50px_rgba(124,58,237,0.12)]"
+                  ? "relative flex flex-col rounded-2xl border-2 border-teal-500 bg-white p-8 shadow-[0_20px_50px_rgba(13,148,136,0.12)]"
                   : "flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-[0_12px_36px_rgba(15,23,42,0.06)]"
               }
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-display text-xl font-bold text-slate-900">{plan.name}</h3>
                 {plan.badge && (
-                  <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-bold text-violet-700">
+                  <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-700">
                     {plan.badge}
                   </span>
                 )}
@@ -81,8 +81,8 @@ export function Pricing() {
                 onClick={() => toast({ title: plan.ctaTitle, description: plan.ctaDesc })}
                 className={
                   plan.featured
-                    ? "btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-[0_10px_28px_rgba(124,58,237,0.4)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
-                    : "mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-base font-bold text-slate-900 transition-all duration-200 hover:border-violet-400 hover:text-violet-700 active:scale-[0.98]"
+                    ? "btn-primary mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold text-white shadow-[0_10px_28px_rgba(13,148,136,0.4)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
+                    : "mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-base font-bold text-slate-900 transition-all duration-200 hover:border-teal-400 hover:text-teal-700 active:scale-[0.98]"
                 }
               >
                 {plan.cta}
@@ -93,7 +93,7 @@ export function Pricing() {
               <ul className="mt-3.5 space-y-3">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-[15px] text-slate-700">
-                    <Check className="mt-0.5 size-4 shrink-0 text-violet-600" strokeWidth={3} />
+                    <Check className="mt-0.5 size-4 shrink-0 text-teal-600" strokeWidth={3} />
                     {f}
                   </li>
                 ))}
@@ -123,7 +123,7 @@ export function Pricing() {
             onClick={() =>
               toast({ title: "Free export started", description: "Try one page free — paste your published URL to begin." })
             }
-            className="group mt-4 inline-flex items-center gap-2 text-base font-bold text-violet-600 transition-colors hover:text-violet-700"
+            className="group mt-4 inline-flex items-center gap-2 text-base font-bold text-teal-600 transition-colors hover:text-teal-700"
           >
             Try one page free
             <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -132,7 +132,7 @@ export function Pricing() {
 
         <div className="mx-auto mt-10 max-w-4xl border-t border-slate-200 pt-8 text-slate-600">
           Annual billing and Agency options.{" "}
-          <a href="#" className="font-semibold text-slate-900 underline underline-offset-4 hover:text-violet-600">
+          <a href="#" className="font-semibold text-slate-900 underline underline-offset-4 hover:text-teal-600">
             See all plans
           </a>
         </div>

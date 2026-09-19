@@ -14,7 +14,7 @@ export function Guides() {
     <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex items-start gap-4">
-          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-blue-500 shadow-[0_8px_20px_rgba(59,130,246,0.35)]">
+          <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-cyan-600 shadow-[0_8px_20px_rgba(8,145,178,0.35)]">
             <BookOpen className="size-6 text-white" />
           </span>
           <div>
@@ -39,12 +39,12 @@ export function Guides() {
                   description: title,
                 })
               }
-              className="group flex items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-200 hover:shadow-[0_12px_32px_rgba(15,23,42,0.08)]"
+              className="group flex items-start justify-between gap-4 rounded-xl border border-slate-200 bg-white p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-[0_12px_32px_rgba(15,23,42,0.08)]"
             >
               <span className="font-display text-base font-bold leading-snug text-slate-900">
                 {title}
               </span>
-              <ArrowRight className="mt-0.5 size-5 shrink-0 text-violet-500 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="mt-0.5 size-5 shrink-0 text-teal-500 transition-transform duration-200 group-hover:translate-x-1" />
             </button>
           ))}
         </div>

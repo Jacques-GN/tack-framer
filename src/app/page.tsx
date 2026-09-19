@@ -1,8 +1,6 @@
 import { Header } from "@/components/site/header";
 import { Hero } from "@/components/site/hero";
-import { HowItWorks01 } from "@/components/site/how-it-works-01";
-import { HowItWorks02 } from "@/components/site/how-it-works-02";
-import { HowItWorks03 } from "@/components/site/how-it-works-03";
+import { HowItWorks } from "@/components/site/how-it-works";
 import { Comparison } from "@/components/site/comparison";
 import { Guides } from "@/components/site/guides";
 import { Pricing } from "@/components/site/pricing";
@@ -19,9 +17,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <HowItWorks01 />
-        <HowItWorks02 />
-        <HowItWorks03 />
+        <HowItWorks />
         <Comparison />
         <Guides />
         <Pricing />

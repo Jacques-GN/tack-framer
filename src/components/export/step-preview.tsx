@@ -44,7 +44,7 @@ export function StepPreview() {
 
   return (
     <div>
-      <p className="text-sm font-bold text-violet-600">Étape 3 sur 3</p>
+      <p className="text-sm font-bold text-teal-600">Étape 3 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Vérifiez votre site et vos fichiers
       </h2>
@@ -61,7 +61,7 @@ export function StepPreview() {
             <span className="ml-auto text-xs text-slate-400">{selectedPages.length} pages HTML</span>
           </div>
 
-          <div className="mt-3 flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 focus-within:border-violet-500">
+          <div className="mt-3 flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 focus-within:border-teal-500">
             <Search className="size-3.5 shrink-0 text-slate-400" />
             <input
               type="text"
@@ -84,7 +84,7 @@ export function StepPreview() {
                   onClick={() => setActiveUrl(p.url)}
                   className={cn(
                     "flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors",
-                    p.url === activeUrl ? "bg-violet-50 ring-1 ring-violet-200" : "hover:bg-slate-50"
+                    p.url === activeUrl ? "bg-teal-50 ring-1 ring-teal-200" : "hover:bg-slate-50"
                   )}
                 >
                   <FileCode2 className="size-4 shrink-0 text-amber-500" />
@@ -101,7 +101,7 @@ export function StepPreview() {
             <button
               type="button"
               onClick={() => setVisible((v) => (v >= filteredFiles.length ? INITIAL_VISIBLE : v + 10))}
-              className="mt-2 text-xs font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800"
+              className="mt-2 text-xs font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800"
             >
               {visible >= filteredFiles.length
                 ? "Afficher moins de pages"
@@ -124,11 +124,11 @@ export function StepPreview() {
             {isMulti && (
               <>
                 <div className="flex items-center gap-2.5">
-                  <Code2 className="size-4 shrink-0 text-violet-600" />
+                  <Code2 className="size-4 shrink-0 text-teal-600" />
                   <p className="font-mono text-xs text-slate-700">Sitemap.xml</p>
                 </div>
                 <div className="flex items-center gap-2.5">
-                  <Bot className="size-4 shrink-0 text-violet-600" />
+                  <Bot className="size-4 shrink-0 text-teal-600" />
                   <p className="font-mono text-xs text-slate-700">robots.txt</p>
                 </div>
               </>
@@ -201,7 +201,7 @@ export function StepPreview() {
               aria-expanded={detailsOpen}
               className="flex w-full items-center gap-2.5 text-left"
             >
-              <Laptop className="size-4 shrink-0 text-violet-600" />
+              <Laptop className="size-4 shrink-0 text-teal-600" />
               <span className="flex-1 text-sm font-bold text-slate-900">Détails d'exportation</span>
               <ChevronDown className={cn("size-4 text-slate-400 transition-transform", detailsOpen && "rotate-180")} />
             </button>

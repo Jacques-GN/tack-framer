@@ -61,7 +61,7 @@ export function Faq() {
                 key={faq.q}
                 className={`overflow-hidden rounded-xl border transition-colors duration-200 ${
                   isOpen
-                    ? "border-violet-300 bg-white shadow-[0_8px_28px_rgba(124,58,237,0.08)]"
+                    ? "border-teal-300 bg-white shadow-[0_8px_28px_rgba(13,148,136,0.08)]"
                     : "border-slate-200 bg-slate-50/60 hover:border-slate-300"
                 }`}
               >
@@ -76,7 +76,7 @@ export function Faq() {
                   </span>
                   <ChevronDown
                     className={`size-5 shrink-0 text-slate-400 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-violet-600" : ""
+                      isOpen ? "rotate-180 text-teal-600" : ""
                     }`}
                   />
                 </button>

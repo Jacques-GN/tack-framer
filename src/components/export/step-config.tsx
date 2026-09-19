@@ -81,7 +81,7 @@ export function StepConfig() {
       aria-pressed={mode === id}
       className={cn(
         "relative rounded-xl border p-4 text-left transition-all duration-150",
-        mode === id ? "border-violet-600 bg-violet-50/60 ring-1 ring-violet-600" : "border-slate-200 bg-white hover:border-slate-300"
+        mode === id ? "border-teal-600 bg-teal-50/60 ring-1 ring-teal-600" : "border-slate-200 bg-white hover:border-slate-300"
       )}
     >
       {mode === id && <CheckBadge />}
@@ -97,7 +97,7 @@ export function StepConfig() {
 
   return (
     <div>
-      <p className="text-sm font-bold text-violet-600">Étape 1 sur 3</p>
+      <p className="text-sm font-bold text-teal-600">Étape 1 sur 3</p>
       <h2 className="font-display mt-1 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
         Choisissez quoi exporter
       </h2>
@@ -107,8 +107,8 @@ export function StepConfig() {
       </p>
 
       {scanning && (
-        <div className="mt-6 flex items-center gap-3 rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm font-medium text-violet-800">
-          <span className="size-4 animate-spin rounded-full border-2 border-violet-300 border-t-violet-600" />
+        <div className="mt-6 flex items-center gap-3 rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-medium text-teal-800">
+          <span className="size-4 animate-spin rounded-full border-2 border-teal-300 border-t-teal-600" />
           Analyse du site en cours — découverte des pages…
         </div>
       )}
@@ -134,7 +134,7 @@ export function StepConfig() {
               {modeCard("multi", <SlidersHorizontal className="size-5" />, "Plusieurs pages", `Choisissez parmi les ${pages.length} pages trouvées.`)}
             </div>
 
-            <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 focus-within:border-violet-500">
+            <div className="mt-4 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 focus-within:border-teal-500">
               <Search className="size-4 shrink-0 text-slate-400" />
               <input
                 type="text"
@@ -150,10 +150,10 @@ export function StepConfig() {
             </div>
 
             <div className="mt-3 flex items-center gap-5">
-              <button type="button" onClick={selectAll} className="text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800">
+              <button type="button" onClick={selectAll} className="text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800">
                 Sélectionnez tout
               </button>
-              <button type="button" onClick={deselectAll} className="text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800">
+              <button type="button" onClick={deselectAll} className="text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800">
                 Tout désélectionner
               </button>
             </div>
@@ -185,7 +185,7 @@ export function StepConfig() {
               <button
                 type="button"
                 onClick={() => setVisible((v) => (v >= filtered.length ? INITIAL_VISIBLE : v + 12))}
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-violet-700 underline underline-offset-2 hover:text-violet-800"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-teal-700 underline underline-offset-2 hover:text-teal-800"
               >
                 {visible >= filtered.length ? "Afficher moins de pages" : `Afficher ${filtered.length - visible} pages de plus`}
                 <ChevronDown className={cn("size-4", visible >= filtered.length && "rotate-180")} />
@@ -208,79 +208,73 @@ export function StepConfig() {
           <div className="mt-5 space-y-6">
             {/* Assets */}
             <div className="border-b border-slate-100 pb-6">
-              <SectionHeader title="Actifs" open={!closed.assets} onToggle={() => toggle("assets")} />
-              {!closed.assets && (
-                <div className="mt-3">
-                  <p className="text-sm leading-relaxed text-slate-500">
-                    Choisissez les ressources à télécharger. Le reste restera lié au site d'origine.
-                  </p>
-                  <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-                    {(
-                      [
-                        ["images", "Images"],
-                        ["fonts", "Polices de caractères"],
-                        ["css", "CSS"],
-                        ["js", "JavaScript"],
-                      ] as const
-                    ).map(([key, label]) => (
-                      <label key={key} className="flex cursor-pointer items-center gap-3">
-                        <GreenCheckbox
-                          checked={options[key]}
-                          onToggle={() => patchOptions({ [key]: !options[key] } as never)}
-                          label={label}
-                        />
-                        <span className="text-sm font-medium text-slate-700">{label}</span>
-                      </label>
-                    ))}
-                  </div>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500">Actifs</h3>
+              <div className="mt-3">
+                <p className="text-sm leading-relaxed text-slate-500">
+                  Choisissez les ressources à télécharger. Le reste restera lié au site d'origine.
+                </p>
+                <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                  {(
+                    [
+                      ["images", "Images"],
+                      ["fonts", "Polices de caractères"],
+                      ["css", "CSS"],
+                      ["js", "JavaScript"],
+                    ] as const
+                  ).map(([key, label]) => (
+                    <label key={key} className="flex cursor-pointer items-center gap-3">
+                      <GreenCheckbox
+                        checked={options[key]}
+                        onToggle={() => patchOptions({ [key]: !options[key] } as never)}
+                        label={label}
+                      />
+                      <span className="text-sm font-medium text-slate-700">{label}</span>
+                    </label>
+                  ))}
                 </div>
-              )}
+              </div>
             </div>
 
             {/* Forms */}
             <div className="border-b border-slate-100 pb-6">
-              <SectionHeader title="Formulaires" open={!closed.forms} onToggle={() => toggle("forms")} />
-              {!closed.forms && (
-                <div className="mt-4">
-                  <CardDropdown
-                    ariaLabel="Gestion des formulaires"
-                    value={options.forms}
-                    onChange={(id) => patchOptions({ forms: id as never })}
-                    entries={FORM_MODES.map((m) => ({ id: m.id, title: FORMS_LABELS[m.id], desc: m.desc, icon: m.icon }))}
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500">Formulaires</h3>
+              <div className="mt-4">
+                <CardDropdown
+                  ariaLabel="Gestion des formulaires"
+                  value={options.forms}
+                  onChange={(id) => patchOptions({ forms: id as never })}
+                  entries={FORM_MODES.map((m) => ({ id: m.id, title: FORMS_LABELS[m.id], desc: m.desc, icon: m.icon }))}
+                />
+                {(options.forms === "custom" || options.forms === "formspree") && (
+                  <input
+                    type="url"
+                    value={options.formsEndpoint}
+                    onChange={(e) => patchOptions({ formsEndpoint: e.target.value })}
+                    placeholder={options.forms === "formspree" ? "https://formspree.io/f/xxxxxxx" : "https://votre-api.com/endpoint"}
+                    className="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-teal-500"
                   />
-                  {(options.forms === "custom" || options.forms === "formspree") && (
-                    <input
-                      type="url"
-                      value={options.formsEndpoint}
-                      onChange={(e) => patchOptions({ formsEndpoint: e.target.value })}
-                      placeholder={options.forms === "formspree" ? "https://formspree.io/f/xxxxxxx" : "https://votre-api.com/endpoint"}
-                      className="mt-3 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none placeholder:text-slate-400 focus:border-violet-500"
-                    />
-                  )}
-                  <p className="mt-3 text-sm leading-relaxed text-slate-500">{formMode.desc}</p>
-                </div>
-              )}
+                )}
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">{formMode.desc}</p>
+              </div>
             </div>
 
             {/* Delivery */}
             <div>
-              <SectionHeader title="Livraison de fichiers" open={!closed.delivery} onToggle={() => toggle("delivery")} />
-              {!closed.delivery && (
-                <div className="mt-4">
-                  <CardDropdown
-                    ariaLabel="Livraison des fichiers"
-                    value={options.delivery}
-                    onChange={(id) => patchOptions({ delivery: id as never })}
-                    entries={DELIVERY_MODES}
-                  />
-                  <p className="mt-3 text-sm leading-relaxed text-slate-500">
-                    La livraison GitHub et Netlify est disponible avec Pro ou Agency.{" "}
-                    <span className="font-medium text-violet-700 underline underline-offset-2">
-                      Choisissez une option d'exportation
-                    </span>
-                  </p>
-                </div>
-              )}
+              <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500">Livraison de fichiers</h3>
+              <div className="mt-4">
+                <CardDropdown
+                  ariaLabel="Livraison des fichiers"
+                  value={options.delivery}
+                  onChange={(id) => patchOptions({ delivery: id as never })}
+                  entries={DELIVERY_MODES}
+                />
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                  La livraison GitHub et Netlify est disponible avec Pro ou Agency.{" "}
+                  <span className="font-medium text-teal-700 underline underline-offset-2">
+                    Choisissez une option d'exportation
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
         )}

@@ -13,12 +13,12 @@ export function Header() {
       <div className="mx-auto max-w-[1350px] rounded-2xl border border-slate-200/80 bg-white/95 shadow-[0_8px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl">
         <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6">
           <a href="#" className="flex shrink-0 items-center gap-2.5">
-            <span className="btn-primary flex size-10 items-center justify-center rounded-xl shadow-[0_4px_14px_rgba(124,58,237,0.4)]">
+            <span className="btn-primary flex size-10 items-center justify-center rounded-xl shadow-[0_4px_14px_rgba(13,148,136,0.4)]">
               <Download className="size-5 text-white" strokeWidth={2.4} />
             </span>
             <span className="flex flex-col leading-none">
               <span className="font-display text-lg font-bold tracking-tight text-slate-900">Snap</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-violet-600">Site</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-teal-600">Site</span>
             </span>
           </a>
 
@@ -27,7 +27,7 @@ export function Header() {
               <a
                 key={label}
                 href="#"
-                className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-700 transition-colors hover:text-violet-600"
+                className="rounded-lg px-3.5 py-2 text-sm font-semibold text-slate-700 transition-colors hover:text-teal-600"
               >
                 {label}
               </a>
@@ -37,7 +37,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <a
               href="#"
-              className="btn-primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(124,58,237,0.35)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
+              className="btn-primary inline-flex items-center rounded-full px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(13,148,136,0.35)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
             >
               Export a site
             </a>
@@ -63,7 +63,7 @@ export function Header() {
               <a
                 key={label}
                 href="#"
-                className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-violet-600"
+                className="block rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-teal-600"
               >
                 {label}
               </a>

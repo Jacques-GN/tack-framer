@@ -27,7 +27,7 @@ export function CtaExplore() {
                 description: "Paste your published URL at the top to start the scan.",
               })
             }
-            className="btn-primary inline-flex shrink-0 items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-base font-bold text-white shadow-[0_10px_30px_rgba(124,58,237,0.4)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
+            className="btn-primary inline-flex shrink-0 items-center justify-center gap-2.5 rounded-xl px-8 py-4 text-base font-bold text-white shadow-[0_10px_30px_rgba(13,148,136,0.4)] transition-all duration-200 hover:brightness-105 active:scale-[0.98]"
           >
             Check my site
             <ArrowRight className="size-5" />
@@ -47,7 +47,7 @@ export function CtaExplore() {
                 key={label}
                 type="button"
                 onClick={() => toast({ title: label, description: "Discover our dedicated export solution." })}
-                className="inline-flex items-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
+                className="inline-flex items-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-teal-300 hover:shadow-[0_10px_28px_rgba(15,23,42,0.08)]"
               >
                 <span className="font-display text-base font-bold text-slate-900">{label}</span>
               </button>

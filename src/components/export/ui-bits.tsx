@@ -23,7 +23,7 @@ export function GreenCheckbox({
       onClick={onToggle}
       className={cn(
         "flex size-5 shrink-0 items-center justify-center rounded-md border-2 transition-all duration-150",
-        checked ? "border-violet-600 bg-violet-600 text-white" : "border-slate-300 bg-white hover:border-violet-500"
+        checked ? "border-teal-600 bg-teal-600 text-white" : "border-slate-300 bg-white hover:border-teal-500"
       )}
     >
       {checked && <Check className="size-3.5" strokeWidth={3.5} />}
@@ -109,7 +109,7 @@ export function CardDropdown({
                 </span>
                 <span className="mt-0.5 block text-xs leading-relaxed text-slate-500">{e.desc}</span>
               </span>
-              {e.id === value && <Check className="mt-0.5 size-4 shrink-0 text-violet-600" />}
+              {e.id === value && <Check className="mt-0.5 size-4 shrink-0 text-teal-600" />}
             </button>
           ))}
         </div>
@@ -147,7 +147,7 @@ export function ToggleRow({
         onClick={onToggle}
         className={cn(
           "relative h-6 w-11 shrink-0 rounded-full transition-colors duration-200",
-          checked ? "bg-violet-600" : "bg-slate-700"
+          checked ? "bg-teal-600" : "bg-slate-700"
         )}
       >
         <span
@@ -188,7 +188,7 @@ export function SectionHeader({
 /** Corner badge on selected mode cards. */
 export function CheckBadge() {
   return (
-    <span className="absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-violet-600 text-white shadow-md ring-2 ring-white">
+    <span className="absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-teal-600 text-white shadow-md ring-2 ring-white">
       <Check className="size-3.5" strokeWidth={3.5} />
     </span>
   );

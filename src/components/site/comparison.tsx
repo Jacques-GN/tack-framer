@@ -57,10 +57,10 @@ export function Comparison() {
                   <th className="w-[39%] px-6 py-4 text-sm font-bold text-slate-900">
                     Framer native workflow
                   </th>
-                  <th className="w-[39%] bg-violet-50/50 px-6 py-4 text-sm font-bold text-violet-800">
+                  <th className="w-[39%] bg-teal-50/50 px-6 py-4 text-sm font-bold text-teal-800">
                     <span className="inline-flex items-center gap-1.5">
                       Recommended path
-                      <Check className="size-4 text-violet-600" strokeWidth={3} />
+                      <Check className="size-4 text-teal-600" strokeWidth={3} />
                     </span>
                   </th>
                 </tr>
@@ -81,7 +81,7 @@ export function Comparison() {
                     <td className="px-6 py-5 text-sm leading-relaxed text-slate-600">
                       {row.framer}
                     </td>
-                    <td className="bg-violet-50/50 px-6 py-5 text-sm font-medium leading-relaxed text-slate-800">
+                    <td className="bg-teal-50/50 px-6 py-5 text-sm font-medium leading-relaxed text-slate-800">
                       {row.nocode}
                     </td>
                   </tr>
@@ -96,7 +96,7 @@ export function Comparison() {
                 href="https://www.framer.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-violet-600 underline underline-offset-2 hover:text-violet-700"
+                className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-700"
               >
                 www.framer.com
               </a>

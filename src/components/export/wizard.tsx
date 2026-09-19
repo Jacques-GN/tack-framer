@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 const STEP_TITLES = ["Contenu & options", "Optimisations", "Vérification"];
 const ctaBtn =
-  "btn-primary inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-[0_10px_28px_rgba(124,58,237,0.4)] transition-all hover:brightness-105 active:scale-[0.98] disabled:opacity-50 sm:w-auto";
+  "btn-primary inline-flex w-full items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-sm font-bold text-white shadow-[0_10px_28px_rgba(13,148,136,0.4)] transition-all hover:brightness-105 active:scale-[0.98] disabled:opacity-50 sm:w-auto";
 
 export function ExportWizard() {
   const { open, step, scanning, pages, selected, exporting, setStep, closeWizard, startExport } =
@@ -57,12 +57,12 @@ export function ExportWizard() {
             <div className="flex items-center gap-4 border-b border-slate-200 bg-white px-5 py-4 sm:px-8">
               <div className="flex min-w-0 flex-1 items-center gap-3">
                 {step > 1 && (
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violet-600 text-xs font-bold text-white">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-teal-600 text-xs font-bold text-white">
                     ✓
                   </span>
                 )}
                 <div className="min-w-0">
-                  <p className="truncate text-xs font-bold uppercase tracking-widest text-violet-600">
+                  <p className="truncate text-xs font-bold uppercase tracking-widest text-teal-600">
                     Assistant d&apos;exportation
                   </p>
                   <p className="truncate text-sm font-semibold text-slate-700">
@@ -77,7 +77,7 @@ export function ExportWizard() {
                     key={s}
                     className={cn(
                       "h-1.5 rounded-full transition-all duration-300",
-                      s === step ? "w-7 bg-violet-600" : s < step ? "w-4 bg-violet-300" : "w-4 bg-slate-200"
+                      s === step ? "w-7 bg-teal-600" : s < step ? "w-4 bg-teal-300" : "w-4 bg-slate-200"
                     )}
                   />
                 ))}

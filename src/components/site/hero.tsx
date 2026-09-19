@@ -23,29 +23,29 @@ export function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#160f2e] pt-40 pb-24 sm:pt-48 sm:pb-32">
+    <section className="relative overflow-hidden bg-[#042f2e] pt-40 pb-24 sm:pt-48 sm:pb-32">
       {/* Grid pattern + glows */}
       <div className="hero-grid absolute inset-0" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full bg-violet-500/20 blur-[140px]"
+        className="pointer-events-none absolute -left-40 top-1/3 h-[520px] w-[520px] rounded-full bg-teal-500/20 blur-[140px]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -right-40 -top-20 h-[420px] w-[420px] rounded-full bg-violet-400/10 blur-[120px]"
+        className="pointer-events-none absolute -right-40 -top-20 h-[420px] w-[420px] rounded-full bg-teal-400/10 blur-[120px]"
         aria-hidden="true"
       />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-violet-400/30 bg-violet-500/10 px-4 py-2 text-sm font-medium text-violet-300">
-          <span className="animate-pulse-dot size-2 rounded-full bg-violet-400" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-500/10 px-4 py-2 text-sm font-medium text-teal-300">
+          <span className="animate-pulse-dot size-2 rounded-full bg-teal-400" />
           From published URL to portable files
         </div>
 
         {/* H1 */}
         <h1 className="font-display mt-8 text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl">
           Export{" "}
-          <span className="bg-gradient-to-r from-violet-300 via-violet-400 to-fuchsia-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-teal-300 via-teal-400 to-cyan-300 bg-clip-text text-transparent">
             Framer
           </span>{" "}
           to HTML
@@ -76,7 +76,7 @@ export function Hero() {
               type="button"
               onClick={handleExport}
               disabled={scanning}
-              className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3.5 text-base font-bold text-white shadow-[0_10px_28px_rgba(124,58,237,0.45)] transition-all duration-200 hover:brightness-105 active:scale-[0.98] disabled:opacity-70 sm:rounded-full sm:px-7 sm:py-3.5"
+              className="btn-primary inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-3.5 text-base font-bold text-white shadow-[0_10px_28px_rgba(13,148,136,0.45)] transition-all duration-200 hover:brightness-105 active:scale-[0.98] disabled:opacity-70 sm:rounded-full sm:px-7 sm:py-3.5"
             >
               {scanning ? (
                 <span className="size-5 animate-spin rounded-full border-2 border-white/40 border-t-white" />

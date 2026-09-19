@@ -28,11 +28,11 @@ export function ProgressModal() {
         {/* Icon + title */}
         <div className="flex flex-col items-center text-center">
           {finished ? (
-            <CheckCircle2 className="size-14 text-violet-600" />
+            <CheckCircle2 className="size-14 text-teal-600" />
           ) : failed ? (
             <XCircle className="size-14 text-red-500" />
           ) : (
-            <Loader2 className="size-14 animate-spin text-violet-600" />
+            <Loader2 className="size-14 animate-spin text-teal-600" />
           )}
           <h3 className="font-display mt-4 text-2xl font-bold tracking-tight text-slate-900">
             {finished ? "Exportation terminée !" : failed ? "Échec de l'exportation" : "Exportation en cours…"}
@@ -51,7 +51,7 @@ export function ProgressModal() {
           <div className="mt-6">
             <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-400 transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-teal-500 to-cyan-400 transition-all duration-500"
                 style={{ width: `${progress.pct}%` }}
               />
             </div>
@@ -90,7 +90,7 @@ export function ProgressModal() {
         {/* Actions */}
         <div className="mt-7 flex flex-col gap-2.5">
           {finished && (
-            <p className="truncate rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-center font-mono text-xs font-medium text-violet-800">
+            <p className="truncate rounded-xl border border-teal-200 bg-teal-50 px-4 py-3 text-center font-mono text-xs font-medium text-teal-800">
               <Download className="mr-1.5 inline size-3.5" />
               {done?.filename}
             </p>
@@ -99,7 +99,7 @@ export function ProgressModal() {
             <button
               type="button"
               onClick={() => void startExport()}
-              className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(124,58,237,0.35)] transition-all hover:brightness-105 active:scale-[0.98]"
+              className="btn-primary inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(13,148,136,0.35)] transition-all hover:brightness-105 active:scale-[0.98]"
             >
               Réessayer
             </button>

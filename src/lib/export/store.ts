@@ -4,8 +4,6 @@ import { create } from "zustand";
 import type { ExportOptions, ScannedPage } from "@/lib/export/types";
 import { DEFAULT_OPTIONS, normalizeInputUrl } from "@/lib/export/types";
 
-export type PlanId = "site-pass" | "pro" | "free";
-
 export type ExportProgress = {
   pct: number;
   label: string;
@@ -33,7 +31,6 @@ type WizardState = {
   selected: string[];
   // options
   options: ExportOptions;
-  plan: PlanId;
   // export
   exporting: boolean;
   progress: ExportProgress | null;
@@ -51,7 +48,6 @@ type WizardState = {
   selectAll: () => void;
   deselectAll: () => void;
   patchOptions: (p: Partial<ExportOptions>) => void;
-  setPlan: (p: PlanId) => void;
   startExport: () => Promise<void>;
 };
 
@@ -66,7 +62,6 @@ const initial = {
   mode: "multi" as "single" | "multi",
   selected: [] as string[],
   options: { ...DEFAULT_OPTIONS },
-  plan: "site-pass" as PlanId,
   exporting: false,
   progress: null as ExportProgress | null,
   done: null as ExportDone | null,
@@ -175,7 +170,6 @@ export const useExportStore = create<WizardState>((set, get) => ({
   deselectAll: () => set({ selected: [] }),
 
   patchOptions: (p) => set({ options: { ...get().options, ...p } }),
-  setPlan: (p) => set({ plan: p }),
 
   startExport: async () => {
     const { scannedUrl, selected, options } = get();

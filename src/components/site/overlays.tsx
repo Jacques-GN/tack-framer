@@ -21,7 +21,7 @@ export function CookieBanner() {
           functionality, and optional support tools.{" "}
           <a
             href="#"
-            className="font-semibold text-violet-600 underline underline-offset-2 hover:text-violet-700"
+            className="font-semibold text-teal-600 underline underline-offset-2 hover:text-teal-700"
           >
             Privacy &amp; cookies
           </a>
@@ -62,7 +62,7 @@ export function ScrollTopButton() {
       type="button"
       aria-label="Scroll back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-6 z-40 flex size-12 items-center justify-center rounded-xl bg-[#251a4d] text-white shadow-[0_10px_30px_rgba(15,23,42,0.35)] transition-all duration-300 hover:bg-[#342468] active:scale-95 ${
+      className={`fixed bottom-6 right-6 z-40 flex size-12 items-center justify-center rounded-xl bg-[#134e4a] text-white shadow-[0_10px_30px_rgba(15,23,42,0.35)] transition-all duration-300 hover:bg-[#115e59] active:scale-95 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"

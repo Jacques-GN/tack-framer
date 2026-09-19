@@ -4,7 +4,7 @@ function Link2({ children }: { children: React.ReactNode }) {
   return (
     <Link
       href="#"
-      className="font-medium text-violet-600 underline decoration-violet-300 underline-offset-2 hover:text-violet-700"
+      className="font-medium text-teal-600 underline decoration-teal-300 underline-offset-2 hover:text-teal-700"
     >
       {children}
     </Link>

@@ -6,14 +6,6 @@ export type ScannedPage = {
   title: string;
 };
 
-export type ScanResult = {
-  ok: boolean;
-  url: string;
-  host: string;
-  pages: ScannedPage[];
-  error?: string;
-};
-
 export type ExportOptions = {
   images: boolean;
   fonts: boolean;

@@ -37,12 +37,12 @@ export function Footer() {
           {/* Brand + newsletter */}
           <div>
             <a href="#" className="flex items-center gap-2.5">
-              <span className="btn-primary flex size-10 items-center justify-center rounded-xl shadow-[0_4px_14px_rgba(124,58,237,0.35)]">
+              <span className="btn-primary flex size-10 items-center justify-center rounded-xl shadow-[0_4px_14px_rgba(13,148,136,0.35)]">
                 <Download className="size-5 text-white" strokeWidth={2.4} />
               </span>
               <span className="flex flex-col leading-none">
                 <span className="font-display text-lg font-bold tracking-tight text-slate-900">Snap</span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-violet-600">Site</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-teal-600">Site</span>
               </span>
             </a>
             <p className="mt-5 max-w-xs leading-relaxed text-slate-600">
@@ -52,7 +52,7 @@ export function Footer() {
 
             <div className="mt-7">
               <p className="flex items-center gap-2 text-sm font-bold text-slate-900">
-                <Mail className="size-4 text-violet-600" />
+                <Mail className="size-4 text-teal-600" />
                 Stay updated
               </p>
               <div className="mt-3 flex max-w-xs items-center gap-2">
@@ -63,13 +63,13 @@ export function Footer() {
                   onKeyDown={(e) => e.key === "Enter" && subscribe()}
                   placeholder="Enter your email"
                   aria-label="Email address"
-                  className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20"
+                  className="min-w-0 flex-1 rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
                 />
                 <button
                   type="button"
                   onClick={subscribe}
                   aria-label="Subscribe"
-                  className="btn-primary flex size-10 shrink-0 items-center justify-center rounded-lg text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all hover:brightness-105 active:scale-95"
+                  className="btn-primary flex size-10 shrink-0 items-center justify-center rounded-lg text-white shadow-[0_4px_14px_rgba(13,148,136,0.35)] transition-all hover:brightness-105 active:scale-95"
                 >
                   <Send className="size-4" />
                 </button>
@@ -77,7 +77,7 @@ export function Footer() {
               <p className="mt-3 max-w-xs text-xs leading-relaxed text-slate-500">
                 By subscribing, you agree to receive product updates from SnapSite. Unsubscribe at
                 any time. See our{" "}
-                <a href="#" className="font-medium text-violet-600 hover:underline">
+                <a href="#" className="font-medium text-teal-600 hover:underline">
                   Privacy
                 </a>
                 .
@@ -94,7 +94,7 @@ export function Footer() {
               <ul className="mt-5 space-y-3">
                 {col.links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-[15px] text-slate-600 transition-colors hover:text-violet-600">
+                    <a href="#" className="text-[15px] text-slate-600 transition-colors hover:text-teal-600">
                       {link}
                     </a>
                   </li>
