@@ -99,3 +99,23 @@ Stage Summary:
 - Aucune page/lien de connexion ; identité visuelle violet/fuchsia/ambre nouvelle génération
 - Fonctionnalité d'export validée non-régression end-to-end dans l'UI (ZIP identique : 334 fichiers / 6.9 Mo)
 - Commits : "refactor: simplification majeure..." + "chore: gitignore..."
+
+---
+Task ID: 6
+Agent: Super Z (main)
+Task: Optimisation UI (palette teal/cyan + fusion how-it-works + code mort) puis push GitHub tack-framer avec purge sécurité .env
+
+Work Log:
+- Palette teal/cyan appliquée via sed sur tout src/ : violet->teal, fuchsia->cyan, hex (#8b5cf6->#14b8a6, #7c3aed->#0d9488, hero #160f2e->#042f2e, scrolltop #251a4d->#134e4a), shadows rgba(124,58,237)->rgba(13,148,136), rgba(139,92,246)->rgba(20,184,166)
+- Fusion how-it-works-01/02/03.tsx (325 l.) -> how-it-works.tsx unique (~230 l.) avec Shell + StepList partagés ; page.tsx mis à jour
+- Code mort supprimé : plan/PlanId/setPlan (store.ts), ScanResult (types.ts)
+- step-config.tsx : sous-sections Actifs/Formulaires/Livraison aplaties (5 collapsibles -> 2)
+- Commit 7c3f9af : 24 fichiers, +363/-478 ; build Next OK ; scan 19 pages + export ZIP re-testés (334 fichiers, 5.7 Mo, intégrité OK, liens ./about réécrits) ; wizard UI validé par screenshots (hero teal, étapes 1-3, aperçu iframe Clavion)
+- Push vers github.com/Jacques-GN/tack-framer (main) avec merge --allow-unrelated-histories pour conserver LICENSE
+- SÉCURITÉ : .env (DATABASE_URL sqlite local) et 337 artefacts db/ étaient trackés -> git rm --cached + filter-branch (purge historique) + gc + force push ; remote vérifié propre (0 occurrence)
+- README.md actualisé (palette teal, étapes Vercel avec nom de repo)
+
+Stage Summary:
+- src/ : 3995 -> 3852 lignes, 31 fichiers ; identité visuelle teal/cyan distincte du clone
+- Fonctionnalité inchangée : scan + export ZIP validés après modification
+- Repo GitHub Jacques-GN/tack-framer à jour, sans secret ni artefact ; prochaine étape : import Vercel (aucune variable d'env requise)

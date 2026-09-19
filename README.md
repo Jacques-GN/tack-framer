@@ -2,7 +2,7 @@
 
 Export any published site as a portable, multi-file bundle: HTML pages, images, fonts, CSS and JavaScript — packaged as a ZIP ready for self-hosting, editing or developer handoff.
 
-![Stack](https://img.shields.io/badge/Next.js%2016-React%2019-violet) ![Styling](https://img.shields.io/badge/Tailwind%20CSS%204-Zustand-violet)
+![Stack](https://img.shields.io/badge/Next.js%2016-React%2019-teal) ![Styling](https://img.shields.io/badge/Tailwind%20CSS%204-Zustand-teal)
 
 A deliberately minimal codebase: **no auth, no database, 8 runtime dependencies**. Everything you need for the export flow, nothing else.
 
@@ -18,7 +18,7 @@ A deliberately minimal codebase: **no auth, no database, 8 runtime dependencies*
 
 ## 🎨 Design
 
-Violet primary (`#7c3aed`) with fuchsia and amber section accents, Inter + Outfit typography. The whole design system fits in ~75 lines of CSS (`.btn-primary` gradient, hero grid, two keyframe animations).
+Teal primary (`#0d9488`) with cyan and amber section accents on a deep-teal hero (`#042f2e`), Inter + Outfit typography. The whole design system fits in ~75 lines of CSS (`.btn-primary` gradient, hero grid, two keyframe animations).
 
 ## 🏗️ Architecture
 
@@ -47,8 +47,8 @@ Limits: 100 pages/export · 100 MB of assets/export · 10 MB per file.
 
 ## 🚀 Deploy to Vercel
 
-1. Push this repository to GitHub.
-2. On [vercel.com](https://vercel.com) → **Add New… → Project** → import the repo.
+1. The code is already on GitHub: `Jacques-GN/tack-framer`.
+2. On [vercel.com](https://vercel.com) → **Add New… → Project** → import `tack-framer`.
 3. Framework preset: **Next.js** (auto-detected). No environment variables required.
 4. Deploy.
 
