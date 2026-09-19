@@ -32,3 +32,25 @@ Stage Summary:
 - Clone fidèle et interactif livré sur la route / (Next.js 16 + Tailwind 4 + shadcn)
 - 13 composants site créés, design system complet reproduit (teal gradient CTA, sections colorées par étape)
 - Toutes les interactions testées end-to-end via agent-browser (desktop + mobile)
+
+---
+Task ID: 3
+Agent: Super Z (main agent)
+Task: Test end-to-end de la fonctionnalité d'export avec https://clavion-wbs.framer.website/
+
+Work Log:
+- Test API /api/scan : 19 pages découvertes (sitemap + crawl liens + /404), titres extraits correctement
+- Test API /api/export : job complet lancé sur les 19 pages, terminé en ~20 s
+- Résultat : 334 fichiers, 311 actifs (168 images, 98 fonts, 46 js), ZIP 5,7 Mo (db/exports/clavion-wbs.framer.website-2026-09-19-ffc7b9.zip)
+- Structure ZIP validée : index.html par page (dossiers /about/, /blog/..., /case-studies/...), assets/, sitemap.xml, robots.txt, export-summary.json, audit-report.html
+- Réécriture HTML vérifiée : 255 références locales assets/, CSS inline préservé, liens internes convertis en chemins relatifs, seules 27 références externes légitimes restent (cal.com, facebook, maps)
+- Test de rendu réel : ZIP extrait + serveur http local 8777 + captures agent-browser
+- Pages testées : / (hero + sections services + témoignage), /about (mission/vision/stats) — rendu identique à l'original (comportement hero animé au scroll identique au site Framer source)
+- Compteurs à 0 = comportement Framer normal (animation au scroll in-view)
+- Rapport d'audit SEO généré (9 Ko, 19 pages)
+- Serveur de test arrêté après validation
+
+Stage Summary:
+- Fonctionnalité d'export validée end-to-end sur un vrai site Framer (19 pages, multi-fichiers)
+- Le site exporté est fonctionnel hors ligne : navigation interne, images, fonts, CSS OK
+- ZIP livré dans db/exports/ ; flux scan → sélection → export → download opérationnel
