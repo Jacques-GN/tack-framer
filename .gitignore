@@ -50,9 +50,13 @@ test
 prompt
 
 server.log
-# Skills directory
+
+# Sandbox infrastructure (not part of the app)
+/.zscripts/
 /skills/
-# Export artifacts & runtime data
+# Internal agent worklog
+/worklog.md
+# Runtime data
 /db/
 /upload/
 
@@ -62,6 +66,6 @@ server.log
 /test_*.png
 /ui_*.png
 /reference_site.*
-examples/
+/reference_text.txt
 tool-results/
 scripts/
