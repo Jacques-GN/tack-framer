@@ -63,3 +63,5 @@ server.log
 /ui_*.png
 /reference_site.*
 examples/
+tool-results/
+scripts/
